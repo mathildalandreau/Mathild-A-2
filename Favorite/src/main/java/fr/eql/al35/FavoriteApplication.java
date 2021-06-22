@@ -20,7 +20,7 @@ public class FavoriteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FavoriteApplication.class, args);
-		System.out.println("Coucou ... ça va la vie ? ");
+		System.out.println("Coucou .. ça va la vie ? ");
 	}
 	
 
