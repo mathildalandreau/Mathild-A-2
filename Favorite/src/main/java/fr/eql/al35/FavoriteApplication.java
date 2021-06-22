@@ -20,7 +20,9 @@ public class FavoriteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FavoriteApplication.class, args);
+		System.out.println("Coucou ... ça va la vie ? ");
 	}
+	
 
 	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini
 	@EventListener({ApplicationReadyEvent.class})
