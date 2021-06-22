@@ -37,33 +37,36 @@ public class Command implements Serializable {
 	private LocalDateTime deliveryReturnDate;
 	private Double taxInPrice;
 	private Double taxOutPrice;
-	
-	@ManyToOne
+
+	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "status_id")
 	private Status status;
-	
-	@ManyToOne
+
+	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "pay_mode_id")
 	private PayMode payMode;
-	
-	@ManyToOne
+
+	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "vat_id")
 	private Vat vat;
-	
-	@ManyToOne 
+
+	@ManyToOne ( cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@ManyToOne (cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
-	
+
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="facturation_address_id")
 	private Address facturationAddress;
-	
-	@OneToMany(mappedBy = "command")
-	private Set<Article> articles;
+
+	@OneToMany (mappedBy="command",  cascade=CascadeType.ALL)
+	private Set<CommandProduct> commandProducts;
+
+	@OneToMany (mappedBy="command",  cascade=CascadeType.ALL)
+	private Set<CommandCustomProduct> commandCustomProducts;
 
 	@Override
 	public String toString() {
@@ -164,6 +167,6 @@ public class Command implements Serializable {
 		return true;
 	}
 
-	
-	
+
+
 }

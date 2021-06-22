@@ -3,6 +3,7 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+//no change since Favori(te)
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -25,8 +28,8 @@ public class City implements Serializable {
 	private Integer id;
 	private Integer zipCode;
 	private String name;
-	
-	@OneToMany(mappedBy = "city")
+
+	@OneToMany(mappedBy = "city",  cascade=CascadeType.ALL)
 	private Set<Address> addresses;
 
 	@Override

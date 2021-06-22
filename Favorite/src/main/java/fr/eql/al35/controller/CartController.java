@@ -1,23 +1,8 @@
 package fr.eql.al35.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import fr.eql.al35.entity.Article;
-import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.Custom;
-import fr.eql.al35.iservice.ArticleIService;
 import fr.eql.al35.iservice.CartIService;
 import fr.eql.al35.iservice.CustomIService;
 
@@ -28,10 +13,9 @@ public class CartController {
 	@Autowired
 	private CartIService cartService;
 	@Autowired
-	private ArticleIService articleService;
-	@Autowired
 	private CustomIService customService;
 
+	/* ancienne méthode Favori(te)
 	@PostMapping("/addToCart")
 	public String displayAddToCart(@ModelAttribute("article") Article article, @RequestParam("idProduct") Integer idProduct,
 			Model model,
@@ -98,4 +82,5 @@ public class CartController {
 		cartService.removeArticle(sessionCart, index);
 		return "redirect:/cart";
 	}
+	 */
 }

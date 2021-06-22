@@ -3,18 +3,19 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+//pas de changement since favori(te)
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
@@ -28,19 +29,8 @@ public class Photo implements Serializable {
 	private String path;
 	private String description;
 
-	@ManyToMany
-	@JoinTable(
-			name = "photos_designs", 
-			joinColumns = @JoinColumn(name = "photo_id"), 
-			inverseJoinColumns = @JoinColumn(name = "design_id"))
-	private Set<Design> designs;
-
-	@ManyToMany
-	@JoinTable(
-			name = "photos_products", 
-			joinColumns = @JoinColumn(name = "photo_id"), 
-			inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> products;
+	@OneToMany(mappedBy = "photo",  cascade=CascadeType.ALL)
+	private Set<PhotoProduct> photoProducts;
 
 	@Override
 	public String toString() {

@@ -3,6 +3,7 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -12,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//pas de changement since Favori(te)
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class ProductType implements Serializable {
@@ -20,12 +23,12 @@ public class ProductType implements Serializable {
 
 	@Id
 	private String name;
+	private Double width;
+	private Double height;
+	private Double weight;
 
-	@OneToMany(mappedBy = "productType")
+	@OneToMany(mappedBy = "productType",  cascade=CascadeType.ALL)
 	private Set<Product> products;
-	
-	@OneToMany(mappedBy = "productType")
-	private Set<ProductTypeLocation> productTypeLocation;
 
 	@Override
 	public String toString() {

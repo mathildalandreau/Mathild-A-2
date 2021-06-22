@@ -12,9 +12,10 @@ import lombok.ToString;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 public class Cart {
-	
-	private Set<Article> articles = new HashSet<Article>();
+
 	private int articlesQuantity;
 	private Double price;
-	
+	Set<CommandProduct> commandProducts = new HashSet<CommandProduct>();
+	Set<CommandCustomProduct> commandCustomProducts = new HashSet<CommandCustomProduct>();
+
 }

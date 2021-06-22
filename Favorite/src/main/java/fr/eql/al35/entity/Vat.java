@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//no change since Favori(te)
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Vat implements Serializable {
@@ -24,7 +26,7 @@ public class Vat implements Serializable {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Double rate;
-	
+
 	@OneToMany(mappedBy = "vat")
 	private Set<Command> commands;
 

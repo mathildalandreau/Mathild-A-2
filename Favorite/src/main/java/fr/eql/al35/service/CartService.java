@@ -1,23 +1,31 @@
 package fr.eql.al35.service;
 
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.Product;
-import fr.eql.al35.entity.Stock;
 import fr.eql.al35.iservice.CartIService;
 
 @Service
 @Transactional
 public class CartService implements CartIService {
 
+	@Override
+	public int getCartProductsQuantity(Cart cart) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getTotalPriceCart(Cart cart) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/*
+	 * ancienne méthode Favori(te)
 	@Override
 	public int getCartProductsQuantity(Cart cart) {
 
@@ -77,4 +85,5 @@ public class CartService implements CartIService {
 		}
 		return inStock;
 	}
+	 */
 }

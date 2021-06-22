@@ -3,6 +3,7 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//no change since Favori(te)
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Status implements Serializable {
@@ -24,8 +27,8 @@ public class Status implements Serializable {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	
-	@OneToMany(mappedBy = "status")
+
+	@OneToMany(mappedBy = "status", cascade=CascadeType.ALL)
 	private Set<Command> commands;
 
 	@Override

@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -34,45 +33,51 @@ public class Product implements Serializable {
 	private LocalDateTime refDeletionDate;
 	private String description;
 	private Double price;
-	private Integer quantity;
-	
-	@OneToMany(mappedBy = "product")
-	private Set<Stock> stocks;
-	
-	@ManyToOne
+	private Integer quantity; //stock
+
+	@ManyToOne( cascade=CascadeType.ALL)
+	@JoinColumn(name="color_id")
+	private Color color;
+	@ManyToOne( cascade=CascadeType.ALL)
+	@JoinColumn(name="pattern_id")
+	private Pattern pattern;
+
+	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
+	private Set<PhotoProduct> photoProducts;
+
+	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "product_type_name")
-	private ProductType productType;
-	
-	@OneToMany(mappedBy = "product")
-	private Set<Article> articles;
-	
-	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
-	private Set<Photo> photos;
+	private ProductType productType; //pas de changement
+
+	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
+	private Set<CustomProduct> customProducts;
+
+	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
+	private Set<CommandProduct> commandProducts;
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", reference=" + reference + ", refCreationDate="
 				+ refCreationDate + ", refDeletionDate=" + refDeletionDate + ", description=" + description + ", price="
-				+ price + ", quantity=" + quantity + ", productType=" + productType
-				+ "]";
+				+ price + ", quantity=" + quantity + ", color=" + color + ", pattern=" + pattern + ", productType="
+				+ productType + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((articles == null) ? 0 : articles.hashCode());
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((photos == null) ? 0 : photos.hashCode());
+		result = prime * result + ((pattern == null) ? 0 : pattern.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((productType == null) ? 0 : productType.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((refCreationDate == null) ? 0 : refCreationDate.hashCode());
 		result = prime * result + ((refDeletionDate == null) ? 0 : refDeletionDate.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
-		result = prime * result + ((stocks == null) ? 0 : stocks.hashCode());
 		return result;
 	}
 
@@ -85,10 +90,10 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (articles == null) {
-			if (other.articles != null)
+		if (color == null) {
+			if (other.color != null)
 				return false;
-		} else if (!articles.equals(other.articles))
+		} else if (!color.equals(other.color))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -105,10 +110,10 @@ public class Product implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (photos == null) {
-			if (other.photos != null)
+		if (pattern == null) {
+			if (other.pattern != null)
 				return false;
-		} else if (!photos.equals(other.photos))
+		} else if (!pattern.equals(other.pattern))
 			return false;
 		if (price == null) {
 			if (other.price != null)
@@ -140,12 +145,10 @@ public class Product implements Serializable {
 				return false;
 		} else if (!reference.equals(other.reference))
 			return false;
-		if (stocks == null) {
-			if (other.stocks != null)
-				return false;
-		} else if (!stocks.equals(other.stocks))
-			return false;
 		return true;
 	}
+
+
+
 
 }

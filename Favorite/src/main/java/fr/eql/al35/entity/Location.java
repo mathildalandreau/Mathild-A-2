@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -20,9 +22,6 @@ public class Location implements Serializable {
 
 	@Id
 	private String label;
-	
-	@OneToMany(mappedBy = "location")
-	private Set<ProductTypeLocation> productTypeLocation;
 
 	@Override
 	public String toString() {
@@ -53,4 +52,7 @@ public class Location implements Serializable {
 			return false;
 		return true;
 	}
+
+
+
 }

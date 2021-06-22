@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//no change since Favori(te)
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Address implements Serializable {

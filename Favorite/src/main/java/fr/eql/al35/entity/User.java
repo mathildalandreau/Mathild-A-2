@@ -22,12 +22,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//no change since Favori(te)
+
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -42,19 +44,19 @@ public class User implements Serializable {
 	private LocalDateTime subscribingDate;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private LocalDateTime unsubscribingDate;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "gender_id")
 	private Gender gender;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_type_id")
 	private UserType userType;
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Address> addresses;
-	
-	@OneToMany(mappedBy = "user")
+
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
 	private Set<Command> commands;
 
 	@Override

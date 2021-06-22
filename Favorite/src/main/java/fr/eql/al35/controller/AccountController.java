@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import fr.eql.al35.entity.Article;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
@@ -18,44 +17,44 @@ import fr.eql.al35.iservice.AccountIService;
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})
 public class AccountController {
-	
+
 	@Autowired
 	private AccountIService accountService;
-	
-	
+
+
 	@GetMapping({"/", "/home"})
 	public String displayHome(Model model) {
-		
+
 		//Utilisateur 3 en dur en session (pour ne pas avoir à créer de compte)
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
-        sessionCartGenerator(model, null);
-		
+		sessionCartGenerator(model, null);
+
 		return "home";
 	}
-	
+
 	@GetMapping("/switchAdmin")
-    public String switchAdminAccount(Model model, HttpSession session) {
+	public String switchAdminAccount(Model model, HttpSession session) {
 
-        User admin = accountService.getAdminAccount();
-        model.addAttribute("sessionUser", admin);
-        Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-        sessionCartGenerator(model, sessionCart);
+		User admin = accountService.getAdminAccount();
+		model.addAttribute("sessionUser", admin);
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		sessionCartGenerator(model, sessionCart);
 
-        return "adminHome";
-    }
-	
+		return "adminHome";
+	}
+
 	@GetMapping("/switchUser")
 	public String switchUser3Account(Model model, HttpSession session) {
-		
+
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-        sessionCartGenerator(model, sessionCart);
-		
+		sessionCartGenerator(model, sessionCart);
+
 		return "home";
 	}
-	
+
 	private void sessionCartGenerator(Model model, Cart sessionCart) {
 		if(sessionCart == null) {
 			Cart cart = new Cart();
@@ -64,14 +63,13 @@ public class AccountController {
 			model.addAttribute("sessionCart", cart);
 		} else {
 			model.addAttribute("sessionCart", sessionCart);
-			for (Article a : sessionCart.getArticles()) {
-//				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
-//				sessionCart.setPrice(sessionCart.getPrice()+a.getPrice()*a.getQuantity());
-			}
+			//			for (Article a : sessionCart.getArticles()) {
+			//				sessionCart.setArticlesQuantity(sessionCart.getArticlesQuantity() + a.getQuantity());
+			//				sessionCart.setPrice(sessionCart.getPrice()+a.getPrice()*a.getQuantity());
+			//}
 		}
-
 	}
-	
+
 	@PostMapping("/goodbye")
 	public String close(SessionStatus status) {
 		status.setComplete();
