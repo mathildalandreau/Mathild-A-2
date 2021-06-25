@@ -11,9 +11,9 @@
 	</parent>
 
 	<groupId>fr.eql.al35</groupId>
-	<artifactId>Favorite</artifactId>
+	<artifactId>Mathilda</artifactId>
 	<version>1.0</version>
-	<name>Favorite</name>
+	<name>Mathilda</name>
 	<description>Projet 1 - AL35</description>
 
 	<properties>

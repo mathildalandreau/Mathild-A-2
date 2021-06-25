@@ -28,6 +28,7 @@ public class Custom implements Serializable {
 	private Integer id;
 	private String size;
 	private Double price;
+
 	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name="color_id")
 	private Color color;
