@@ -13,16 +13,11 @@ import fr.eql.al35.iservice.CartIService;
 public class CartService implements CartIService {
 
 	@Override
-	public int getCartProductsQuantity(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public double getTotalPriceCart(Cart cart) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	/*
 	 * ancienne méthode Favori(te)

@@ -18,14 +18,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String reference;
@@ -33,27 +36,22 @@ public class Product implements Serializable {
 	private LocalDateTime refDeletionDate;
 	private String description;
 	private Double price;
-	private Integer quantity; //stock
-
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="color_id")
+	private Integer quantity; // stock
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "color_id")
 	private Color color;
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="pattern_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pattern_id")
 	private Pattern pattern;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_type_name")
+	private ProductType productType; // pas de changement
 
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<PhotoProduct> photoProducts;
 
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name = "product_type_name")
-	private ProductType productType; //pas de changement
-
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
-	private Set<CustomProduct> customProducts;
-
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
-	private Set<CommandProduct> commandProducts;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private Set<CustomsProducts> customsProducts;
 
 	@Override
 	public String toString() {
@@ -147,8 +145,5 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-
-
-
 
 }

@@ -5,11 +5,10 @@ import fr.eql.al35.entity.Cart;
 
 public interface CartIService {
 
-	int getCartProductsQuantity(Cart cart);
 	double getTotalPriceCart(Cart cart);
-
+	
 	/* ancienne méthode Favori(te)
-	public boolean enoughInStock(Article article, Product product);
+	 * ajout methodes add
 	void addArticle(Cart cart, Article article);
 	public Article getArticle(Cart cart, int index);
 	public void removeArticle(Cart cart, int index);
