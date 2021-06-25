@@ -19,4 +19,5 @@ public class Size implements Serializable {
 	@GeneratedValue (strategy=GenerationType.IDENTITY )
 	private long id;
 	private String size;
+	private Double weight;
 }

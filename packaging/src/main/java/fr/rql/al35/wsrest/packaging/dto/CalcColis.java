@@ -2,8 +2,6 @@ package fr.rql.al35.wsrest.packaging.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.JoinColumn;
-
 import lombok.Data;
 
 @Data
