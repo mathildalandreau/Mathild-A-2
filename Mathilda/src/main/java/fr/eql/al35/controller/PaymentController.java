@@ -1,8 +1,5 @@
 package fr.eql.al35.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -44,13 +41,11 @@ public class PaymentController {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
 	
-		command = cmdService.createCommand(sessionCart, command); //ajouter les données du panier
-		
-		command.setUser(sessionUser); 
+		//Floriane : nouvelle méthode pour créer une command, plus simple :
+		command = cmdService.createCommand(sessionCart, sessionUser); 
 		cmdService.saveUser(sessionUser); 
-		
-		command.setReference(writeReference(sessionUser, command));
-		cmdService.saveCommand(command); //stocker en BDD command et addresses
+		//Floriane : modif méthode service : à priori ne sert plus, tester avec le front
+			//	cmdService.saveCommand(command); //stocker en BDD command et addresses
 		
 		try {
 			Thread.sleep(3000);
@@ -61,12 +56,5 @@ public class PaymentController {
 		return "redirect:home";
 	}
 
-	private String writeReference(User user, Command command) {
-		StringBuilder reference = new StringBuilder();
-		reference.append("CMD_");
-		reference.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")));
-		reference.append("_Client_");
-		reference.append(user.getId()); //a modif avec le n° Client en session
-		return reference.toString();
-	}
+
 }
