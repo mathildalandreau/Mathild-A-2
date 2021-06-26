@@ -1,14 +1,14 @@
 package fr.eql.al35.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -24,8 +24,10 @@ public class Dimension implements Serializable {
 	private Double width;
 	private Double height;
 	private Double weight;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "product_id")
-	private Product product;
+	
+	@OneToMany(mappedBy = "dimension", cascade = CascadeType.ALL)
+	private Set<Product> products;
+	
+
 
 }
