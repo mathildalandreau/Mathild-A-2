@@ -1,6 +1,10 @@
 package fr.eql.al35.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -9,11 +13,15 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.PayMode;
+import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
+import fr.eql.al35.entity.Vat;
 import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.repository.AddressIRepository;
 import fr.eql.al35.repository.CityIRepository;
 import fr.eql.al35.repository.CommandIRepository;
+import fr.eql.al35.repository.CommandLineIRepository;
 import fr.eql.al35.repository.CustomIRepository;
 import fr.eql.al35.repository.PayModeIRepository;
 import fr.eql.al35.repository.ProductIRepository;
@@ -25,8 +33,13 @@ import fr.eql.al35.repository.VatIRepository;
 @Transactional
 public class CommandService implements CommandIService {
 
+	//methodes services refaites par : Floriane
+
 	@Autowired
 	CommandIRepository cmdRepo;
+
+	@Autowired
+	CommandLineIRepository cmdLineRepo;
 
 	@Autowired
 	StatusIRepository statusRepo;
@@ -52,82 +65,22 @@ public class CommandService implements CommandIService {
 	@Autowired
 	ProductIRepository productRepo;
 
-	@Override
-	public Command createCommand(Cart cart, Command command) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//méthode publiques : 
+
 
 	@Override
-	public Command saveCommand(Command command) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Command> findByUser(Integer user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Command displaybyId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Command> displayAllCommands() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Command updateCommand(Command command) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveUser(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	/*
-	@Override
-	public Command createCommand(Cart cart, Command command) {
-		command.setArticles(cart.getArticles());
-		command.setTaxOutPrice(cart.getPrice());
-		command.setTaxOutPrice((double) (Math.round(cart.getPrice()*100) / 100));
+	public Command createCommand(Cart cart, User sessionUser) {
+		Command command = new Command();
+		//reference
+		command.setReference(writeReference(sessionUser));
+		setCreationDateAndStatus(command); //creationDate et status
+		command.setTaxOutPrice((double) (Math.round(cart.getPrice()*100) / 100)); //taxOutPrice
+		setVatAndTaxInPrice(command); //vat and taxPrice
+		command.setUser(sessionUser); //user
+		setAddresses(command); // à implémenter: deliveryAddress and facturationAddress
+		command.setCommandLines(cart.getCommandLines()); //commandLines
+		cmdRepo.save(command); //enregistrer en BDD
 		return command;
-	}
-
-	@Override
-	public Command saveCommand(Command command) {
-		setInfosCommand(command);
-		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
-		cmdRepo.save(command);
-		for (Article article : command.getArticles()) {
-			article.setCommand(command);
-			updateStock(article);
-		}
-		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
-		return command;
-	}
-
-	private void setInfosCommand(Command command) {
-		Optional<Vat> vat = vatRepo.findById(5); //en dur global pour la command, a modifier pour chaque article plus tard
-		if(vat.isPresent()) {
-			command.setVat(vat.get());
-			command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.get().getRate());
-			command.setCreationDate(LocalDateTime.now());
-			Optional<PayMode> paymode = payModeRepo.findById(1);
-			command.setPayMode(paymode.isPresent() ? paymode.get() : null);
-			Optional<Status> status = statusRepo.findById(1);
-			command.setStatus(status.isPresent() ? status.get() : null);
-		}
 	}
 
 
@@ -143,6 +96,7 @@ public class CommandService implements CommandIService {
 		return filteredCommands;
 	}
 
+
 	@Override
 	public Command displaybyId(Integer id) {
 		Optional<Command> command = cmdRepo.findById(id);
@@ -155,6 +109,60 @@ public class CommandService implements CommandIService {
 	}
 
 	@Override
+	public void saveUser(User user) {
+		userRepo.save(user);
+	}
+
+
+	//méthode privées : 
+
+	private void setCreationDateAndStatus(Command command) {
+		command.setCreationDate(LocalDateTime.now());
+		Optional<Status> status = statusRepo.findById(1);
+		command.setStatus(status.isPresent() ? status.get() : null);
+	}
+
+	private void setAddresses(Command command) {
+		//a implémenter 
+	}
+
+
+	private void setVatAndTaxInPrice(Command command) {
+		Optional<PayMode> paymode = payModeRepo.findById(1);
+		command.setPayMode(paymode.isPresent() ? paymode.get() : null);
+		Optional<Vat> vat = vatRepo.findById(5); //en dur global pour la command, a modifier pour chaque article plus tard
+		if(vat.isPresent()) {
+			command.setVat(vat.get());
+			command.setTaxInPrice(command.getTaxOutPrice() + command.getTaxOutPrice()*vat.get().getRate());			
+		}
+	}
+
+	private String writeReference(User user) {
+		StringBuilder reference = new StringBuilder();
+		reference.append("CMD_");
+		reference.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hh-mm-ss")));
+		reference.append("_Client_");
+		reference.append(user.getId()); //a modif avec le n° Client en session
+		return reference.toString();
+	}
+
+
+
+
+
+	/*
+	 * Pas encore retouchées :
+	 */
+
+	@Override
+	public Command updateCommand(Command command) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	/*
+	 * 	@Override
 	public Command updateCommand(Command command) {
 		addressRepo.save(command.getDeliveryAddress());
 		addressRepo.save(command.getFacturationAddress());
@@ -165,19 +173,22 @@ public class CommandService implements CommandIService {
 		statusRepo.save(command.getStatus());
 		return cmdRepo.save(command);
 	}
+	 */
 
-	private void updateStock(Article article) {
-		article.getProduct().setQuantity(article.getProduct().getQuantity() - article.getQuantity());
-		productRepo.save(article.getProduct());
-		Stock stock = stockRepo.findByProductAndSize(article.getProduct(), article.getSize());
-		stock.setQuantity(stock.getQuantity() - article.getQuantity());
-		stockRepo.save(stock);
-	}
 
-	@Override
-	public void saveUser(User user) {
-		userRepo.save(user);
+	/*
+	 * 	@Override
+	public Command saveCommand(Command command) {
+		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
+		cmdRepo.save(command);
+		for (Article article : command.getArticles()) {
+			article.setCommand(command);
+			updateStock(article);
+		}
+		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
+		return command;
 	}
 
 	 */
+
 }
