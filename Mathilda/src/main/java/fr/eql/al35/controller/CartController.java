@@ -1,8 +1,13 @@
 package fr.eql.al35.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
+import fr.eql.al35.entity.Cart;
 import fr.eql.al35.iservice.CartIService;
 import fr.eql.al35.iservice.CustomIService;
 
@@ -14,6 +19,19 @@ public class CartController {
 	private CartIService cartService;
 	@Autowired
 	private CustomIService customService;
+	
+	
+	//méthode revue par Floriane :
+	@GetMapping({"/cart", "/essaiCartFloriane"})
+	public String displayCart(Model model,
+			HttpSession session) {
+
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		model.addAttribute("cart", sessionCart);
+		model.addAttribute("commandLines", sessionCart.getCommandLines());
+		model.addAttribute("total", sessionCart.getPrice());
+		return "cart";
+	}
 
 	/* ancienne méthode Favori(te)
 	@PostMapping("/addToCart")
@@ -62,18 +80,6 @@ public class CartController {
 		cartService.addArticle(sessionCart, article);
 
 		return "redirect:/products/all";
-	}
-
-	@GetMapping("/cart")
-	public String displayCart( Model model,
-			HttpSession session) {
-
-		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		Set<Article> articles = sessionCart.getArticles();
-		model.addAttribute("cart", sessionCart);
-		model.addAttribute("articles", articles);
-		model.addAttribute("total", sessionCart.getPrice());
-		return "cart";
 	}
 
 	@PostMapping("/cart")
