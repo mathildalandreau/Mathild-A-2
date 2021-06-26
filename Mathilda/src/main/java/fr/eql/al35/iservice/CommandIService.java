@@ -8,7 +8,7 @@ import fr.eql.al35.entity.User;
 
 public interface CommandIService {
 	
-	public Command createCommand(Cart cart, Command command);
+	public Command createCommand(Cart cart);
 	public Command saveCommand(Command command);
 	public List<Command> findByUser(Integer user);
 	public Command displaybyId(Integer id);

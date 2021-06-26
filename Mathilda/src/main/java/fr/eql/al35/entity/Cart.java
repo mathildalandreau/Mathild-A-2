@@ -14,6 +14,6 @@ public class Cart {
 
 	private int articlesQuantity;
 	private Double price;
-	private Set<Product> products;
+	private Set<CommandLine> commandLines;
 
 }

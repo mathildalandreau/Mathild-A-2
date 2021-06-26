@@ -6,79 +6,85 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.entity.CommandLine;
+import fr.eql.al35.entity.Product;
 import fr.eql.al35.iservice.CartIService;
 
 @Service
 @Transactional
-public class CartService implements CartIService {
+public class CartService implements CartIService { 
+	//methodes services refaites par : Floriane
+
+	//méthodes publiques : 
 
 	@Override
-	public double getTotalPriceCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	/*
-	 * ancienne méthode Favori(te)
-	@Override
-	public int getCartProductsQuantity(Cart cart) {
-
-		Set<Article> articles = cart.getArticles();
-		int articlesQuantity = 0;
-
-		for (Article article : articles) {
-			articlesQuantity += article.getQuantity();
+	public void addProduct(Cart cart, Product product, int quantity) {
+		//TODO : a tester(Floriane)
+		if (identifyExistingCommandLine(cart, product) != null) {
+			CommandLine commandLine = identifyExistingCommandLine(cart, product);
+			commandLine.setProductQuantity(commandLine.getProductQuantity() + quantity);
+		} else {
+			createNewCommandLine(cart, product, quantity);
 		}
-
-		return articlesQuantity;
-	}
-
-	@Override
-	public double getTotalPriceCart(Cart cart) {
-		Set<Article> articles = cart.getArticles();
-		double total = 0.0;
-		double sousTotal = 0.0;
-		for (Article article : articles) {
-			sousTotal = article.getProduct().getPrice() * article.getQuantity();
-			total = total + sousTotal;
-		}		
-		return total;
+		updateCart(cart);
 	}
 
 
 	@Override
-	public void addArticle(Cart cart, Article article) {
-		cart.getArticles().add(article);
-		cart.setArticlesQuantity(cart.getArticlesQuantity()+article.getQuantity());
-		cart.setPrice(cart.getPrice()+article.getPrice()*article.getQuantity());
+	public Product getProduct(Cart cart, int index) {
+		// TODO a implémenter
+		//Floriane : trouver à quoi sert cette méthode 
+		//et comment l'adapter avec la nouvelle structure
+		return null;
 	}
 
 	@Override
-	public Article getArticle(Cart cart, int index) {
-		ArrayList<Article> articles = new ArrayList<>(cart.getArticles());
-		return articles.get(index);
+	public void removeCommandLine(Cart cart, Product product) {
+		CommandLine commandLine = identifyExistingCommandLine(cart, product);
+		cart.getCommandLines().remove(commandLine);
+		updateCart(cart);
 	}
 
-	@Override
-	public void removeArticle(Cart cart, int index) {
-		Article article = this.getArticle(cart, index);
-		cart.getArticles().remove(article);
-		cart.setArticlesQuantity(cart.getArticlesQuantity()-article.getQuantity());
-		cart.setPrice(cart.getPrice()-article.getPrice()*article.getQuantity());
+
+
+	//méthodes privées : 
+	private void updateCart(Cart cart) {
+		updateArticleQuantity(cart);
+		updateTotalPrice(cart);
 	}
 
-	@Override
-	public boolean enoughInStock(Article article, Product product) {
-		boolean inStock = false;
-		for (Stock stock : product.getStocks()) {
-			if (stock.getSize().getLabel().equals(article.getSize().getLabel())){
-				if (stock.getQuantity()>=article.getQuantity()) {
-					inStock=true;
-				}
-			}
+	private void updateArticleQuantity(Cart cart) {
+		int articleQuantity = 0;
+		for (CommandLine commandLine : cart.getCommandLines()) {
+			articleQuantity += commandLine.getProductQuantity();
 		}
-		return inStock;
+		cart.setArticlesQuantity(articleQuantity);
 	}
-	 */
+
+	private void updateTotalPrice(Cart cart) {
+		double total = 0d;
+		for (CommandLine commandLine : cart.getCommandLines()) {
+			total = total + commandLine.getProduct().getPrice() * commandLine.getProductQuantity();
+		}
+		cart.setPrice(total);
+	}
+
+	private CommandLine identifyExistingCommandLine(Cart cart, Product product) {
+		CommandLine foundedCommandLine = null;
+		for (CommandLine cartCommandLine : cart.getCommandLines()) {
+			if (cartCommandLine.getProduct().getReference() == product.getReference()) {
+				foundedCommandLine = cartCommandLine;
+				break;
+			} 
+		}
+		return foundedCommandLine;
+	}
+
+	private void createNewCommandLine(Cart cart, Product product, int quantity) {
+		CommandLine commandLine = new CommandLine();
+		commandLine.setProduct(product);
+		commandLine.setProductQuantity(quantity);
+		cart.getCommandLines().add(commandLine);
+	}
+
 }
