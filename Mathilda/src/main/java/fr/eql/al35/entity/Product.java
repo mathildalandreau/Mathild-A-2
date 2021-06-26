@@ -46,6 +46,10 @@ public class Product implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_type_name")
 	private ProductType productType; // pas de changement
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dimension_id")
+	private Dimension dimension;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<PhotoProduct> photoProducts;
