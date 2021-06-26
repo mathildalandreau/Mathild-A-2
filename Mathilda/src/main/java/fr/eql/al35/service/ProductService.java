@@ -57,7 +57,7 @@ public class ProductService implements ProductIService {
 		return (List<Product>) productRepository.findByProductType(productType);
 	}
 
-	
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public Product upDate(Integer id, Product product) {
 		product.setId(id);
@@ -68,6 +68,7 @@ public class ProductService implements ProductIService {
 		return productRepository.save(product);
 	}
 
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public void setDeleteProduct(Integer id) {
 		Optional<Product> product = productRepository.findById(id);
@@ -76,6 +77,7 @@ public class ProductService implements ProductIService {
 		}
 	}
 
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public Product addProduct(Product product) {
 		/* ancien code Favori(te)

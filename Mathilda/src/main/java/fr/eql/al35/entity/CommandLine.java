@@ -28,4 +28,7 @@ public class CommandLine implements Serializable {
 	@ManyToOne ( cascade=CascadeType.ALL)
 	@JoinColumn(name = "command_id")
 	private Command command;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "color_id")
+	private Color color;
 }
