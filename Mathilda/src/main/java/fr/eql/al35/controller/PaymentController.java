@@ -43,7 +43,7 @@ public class PaymentController {
 			@ModelAttribute("command") Command command) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
-		
+	
 		command = cmdService.createCommand(sessionCart, command); //ajouter les données du panier
 		
 		command.setUser(sessionUser); 
