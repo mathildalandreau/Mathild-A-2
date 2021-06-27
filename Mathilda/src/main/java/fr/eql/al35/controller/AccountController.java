@@ -1,8 +1,5 @@
 package fr.eql.al35.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +11,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.CommandLine;
-import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
+import fr.eql.al35.iservice.CartIService;
 
 @Controller
 @SessionAttributes({"sessionCart", "sessionUser"})
@@ -25,6 +21,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountIService accountService;
+
+	@Autowired
+	private CartIService cartService;
 
 	//méthode refaite par Floriane: attention, cart en dur "generateCartEnDur"
 	@GetMapping({"/", "/home"})
@@ -34,13 +33,15 @@ public class AccountController {
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
 		//Cart en dur : 
-		generateCartEnDur(model);
+		model.addAttribute("sessionCart", cartService.generateFakeCart());
+		
 		//vraie méthode : 
 		//sessionCartGenerator(model, null); commenté pour tester un cart en dur
 
 		return "home";
 	}
 
+	/*
 	private void generateCartEnDur(Model model) {
 		//crée produits :
 		Product product1 = new Product();
@@ -74,6 +75,7 @@ public class AccountController {
 		//on le met en session
 		model.addAttribute("sessionCart", cart);
 	}
+	 */
 
 	@GetMapping("/switchAdmin")
 	public String switchAdminAccount(Model model, HttpSession session) {

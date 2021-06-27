@@ -50,7 +50,7 @@ public class Command implements Serializable {
 	@JoinColumn(name = "vat_id")
 	private Vat vat;
 
-	@ManyToOne ( cascade=CascadeType.ALL)
+	@ManyToOne ( cascade=CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -62,7 +62,7 @@ public class Command implements Serializable {
 	@JoinColumn(name="facturation_address_id")
 	private Address facturationAddress;
 	
-	@OneToMany(mappedBy="command", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="command", cascade=CascadeType.MERGE)
 	private Set<CommandLine> commandLines;
 	
 	@Override

@@ -43,6 +43,7 @@ public class PaymentController {
 	
 		//Floriane : nouvelle méthode pour créer une command, plus simple :
 		command = cmdService.createCommand(sessionCart, sessionUser); 
+		System.out.println("command : post Service : " + command.toString());
 		cmdService.saveUser(sessionUser); 
 		//Floriane : modif méthode service : à priori ne sert plus, tester avec le front
 			//	cmdService.saveCommand(command); //stocker en BDD command et addresses

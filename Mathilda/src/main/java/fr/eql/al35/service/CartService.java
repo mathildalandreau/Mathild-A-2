@@ -1,32 +1,66 @@
 package fr.eql.al35.service;
 
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.entity.Color;
 import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.iservice.CartIService;
+import fr.eql.al35.repository.ColorIRepository;
+import fr.eql.al35.repository.CommandLineIRepository;
+import fr.eql.al35.repository.ProductIRepository;
 
 @Service
 @Transactional
-public class CartService implements CartIService { 
+public class CartService implements CartIService {
+
+	@Autowired
+	private CommandLineIRepository commandLineRepo;
+
+	@Autowired
+	private ProductIRepository productRepo;
+
+	@Autowired
+	private ColorIRepository colorRepo;
+
+
+	//tester un cart en dur :
+	@Override
+	public Cart generateFakeCart() {
+		Cart cart = new Cart();
+		Product product1 = productRepo.findById(1).get();
+		Product product2 = productRepo.findById(2).get();
+		Color color1 = colorRepo.findById(1).get();
+		Color color2 = colorRepo.findById(2).get();
+		createNewCommandLine(cart, product1, 2, color1);
+		createNewCommandLine(cart, product2, 3, color2);
+		updateCart(cart);
+		return cart;
+	}
+
 	//methodes services refaites par : Floriane
 
 	//méthodes publiques : 
 
 	@Override
-	public void addProduct(Cart cart, Product product, int quantity) {
+	public CommandLine addProduct(Cart cart, Product product, int quantity, Color color) {
 		//TODO : a tester(Floriane)
+		CommandLine commandLine = new CommandLine();
 		if (identifyExistingCommandLine(cart, product) != null) {
-			CommandLine commandLine = identifyExistingCommandLine(cart, product);
+			commandLine = identifyExistingCommandLine(cart, product);
 			commandLine.setProductQuantity(commandLine.getProductQuantity() + quantity);
 		} else {
-			createNewCommandLine(cart, product, quantity);
+			commandLine = createNewCommandLine(cart, product, quantity, color);
 		}
 		updateCart(cart);
+		return commandLine;
 	}
 
 
@@ -80,11 +114,18 @@ public class CartService implements CartIService {
 		return foundedCommandLine;
 	}
 
-	private void createNewCommandLine(Cart cart, Product product, int quantity) {
+	private CommandLine createNewCommandLine(Cart cart, Product product, int quantity, Color color) {
 		CommandLine commandLine = new CommandLine();
 		commandLine.setProduct(product);
 		commandLine.setProductQuantity(quantity);
-		cart.getCommandLines().add(commandLine);
+		commandLine.setColor(color);
+		Set<CommandLine> commandLines = new HashSet<CommandLine>();
+		if (cart.getCommandLines()!= null) {
+			commandLines = cart.getCommandLines();	
+		}
+		commandLines.add(commandLine);
+		cart.setCommandLines(commandLines);
+		return commandLine;
 	}
 
 }

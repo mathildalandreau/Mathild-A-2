@@ -6,21 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.entity.Color;
+import fr.eql.al35.entity.Product;
 import fr.eql.al35.iservice.CartIService;
-import fr.eql.al35.iservice.CustomIService;
 
 @Controller
 public class CartController {
 
-
 	@Autowired
 	private CartIService cartService;
-	@Autowired
-	private CustomIService customService;
-	
-	
+
 	//méthode revue par Floriane :
 	@GetMapping({"/cart", "/essaiCartFloriane"})
 	public String displayCart(Model model,
@@ -33,25 +33,19 @@ public class CartController {
 		return "cart";
 	}
 
-	/* ancienne méthode Favori(te)
+	//methode revue par Floriane : ajouter ds html quantityProduct
+	//voire pour refaire en injectant direct une commandLine dans la méthode ?
 	@PostMapping("/addToCart")
-	public String displayAddToCart(@ModelAttribute("article") Article article, @RequestParam("idProduct") Integer idProduct,
-			Model model,
-			HttpSession session) {
-
-		articleService.addProduit(idProduct, article);
-
-		if(!cartService.enoughInStock(article, article.getProduct())){
-			return "plusDeStock";
-		}
-
+	public String displayAddToCart(@ModelAttribute("product") Product product, 
+			@RequestParam("quantityProduct") int quantityProduct,
+			@RequestParam("colorProduct") Color colorProduct,
+			Model model, HttpSession session) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		cartService.addArticle(sessionCart, article);
-
-
+		cartService.addProduct(sessionCart, product, quantityProduct, colorProduct);
 		return "redirect:/products/all";
 	}
 
+	/* ancienne méthode Favori(te)
 	@PostMapping("/addCustomArticleToCart")
 	public String displayAddCustomArticleToCart(@ModelAttribute("article") Article article, @RequestParam("idProduct") Integer idProduct,
 			@RequestParam("idCustom1") Integer idCustom1 ,
