@@ -8,6 +8,7 @@ public class PackagingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PackagingApplication.class, args);
+		System.out.println("http://localhost:8087");
 	}
 
 }
