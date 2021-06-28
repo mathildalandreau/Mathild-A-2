@@ -3,13 +3,16 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -46,8 +49,8 @@ public class Product implements Serializable {
 	@JoinColumn(name = "dimension_id")
 	private Dimension dimension;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private Set<PhotoProduct> photos;
+	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
+	private Set<Photo> photos;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<CustomsProducts> customsProducts;
@@ -138,5 +141,7 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }
