@@ -13,7 +13,7 @@ h3.h3 {
 }
 
 .price{
-	color: #366273;
+	color: #E32020;
 }
 
 .product-grid{
@@ -71,6 +71,7 @@ h3.h3 {
 .product-grid .product-content {
     padding: 20px 10px;
     text-align: center;
+    background-color: #FFE4DB;
 }
 
 .product-grid .title {
@@ -78,7 +79,7 @@ h3.h3 {
 }
 
 .product-grid .title a {
-    color: #366273;
+    color: #AD1E1E;
     text-decoration: none;
     font-weight: bold;
 }

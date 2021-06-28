@@ -22,7 +22,7 @@ body{
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	background-color: #F2F2F2;
+	background-image: url("/photos/product/logo.PNG");
 }
 
 #center{
@@ -31,7 +31,7 @@ body{
 }
 
 #footer{
-	background-color: #B4CBD9;
+	background-color: #E28787;
 	text-align: center;
 	color: white;
 }
@@ -74,7 +74,7 @@ body{
 	position: absolute;
 	top: 7px;
 	right: 5px;
-	background-color: #254B59;
+	background-color: #AD1E1E;
 	color: white;
 	border-radius: 25px;
 	width: 15px;
