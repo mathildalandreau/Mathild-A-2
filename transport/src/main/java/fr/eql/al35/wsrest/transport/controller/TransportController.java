@@ -1,5 +1,6 @@
 package fr.eql.al35.wsrest.transport.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class TransportController {
 	public Transporteur getTransporteurById(@PathVariable("idTransporteur") Integer idTransporteur) {
 		return transportService.findById(idTransporteur);
 	}
-	
-	@GetMapping("/allTarifs")
-	public Set<Tarif> displayAllTarifs(@PathVariable("weight") Double weight) {
+
+	@GetMapping("/allTarifs/{weight}")
+	public List<Tarif> displayAllTarifs(@PathVariable("weight") Double weight) {
 		return transportService.calculateTarifs(weight);
 	}
 

@@ -1,11 +1,11 @@
 package fr.eql.al35.wsrest.transport.service;
 
-import java.util.Set;
+import java.util.List;
 
 import fr.eql.al35.wsrest.transport.entity.Tarif;
 
 public interface TransportIService {
-	
-	public Set<Tarif> calculateTarifs(Double weight);
+
+	public List<Tarif> calculateTarifs(Double weight);
 
 }

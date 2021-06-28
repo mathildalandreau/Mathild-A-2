@@ -1,7 +1,7 @@
 package fr.eql.al35.wsrest.transport.service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -19,18 +19,18 @@ public class TransportService implements TransportIService {
 
 	@Autowired
 	private TransporteurDao transporteurDao;
-	
+
 	@Autowired
 	private TarifDao tarifDao;
-	
+
 	public Transporteur findById(Integer id) {
 		return transporteurDao.findById(id).get();
 	}
 
 	@Override
-	public Set<Tarif> calculateTarifs(Double weight) {
-		Set<Tarif> allTarifs = (Set<Tarif>) tarifDao.findAll();
-		Set<Tarif> tarifs = new HashSet<Tarif>();
+	public List<Tarif> calculateTarifs(Double weight) {
+		List<Tarif> allTarifs = (List<Tarif>) tarifDao.findAll();
+		List<Tarif> tarifs = new ArrayList<Tarif>();
 		for (Tarif tarif : allTarifs) {
 			if (weight > tarif.getMinWeight() && weight < tarif.getMaxWeight()) {
 				tarifs.add(tarif);
