@@ -1,17 +1,17 @@
 package fr.eql.al35.iservice;
 
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.entity.Color;
+import fr.eql.al35.entity.CommandLine;
+import fr.eql.al35.entity.Product;
 
 
 public interface CartIService {
 
-	int getCartProductsQuantity(Cart cart);
-	double getTotalPriceCart(Cart cart);
+	//methodes services refaites par : Floriane
+	public CommandLine addProduct(Cart cart, Product product, int quantity, Color color);
+	public Product getProduct(Cart cart, int index);
+	public void removeCommandLine(Cart cart, Product product);
 
-	/* ancienne méthode Favori(te)
-	public boolean enoughInStock(Article article, Product product);
-	void addArticle(Cart cart, Article article);
-	public Article getArticle(Cart cart, int index);
-	public void removeArticle(Cart cart, int index);
-	 */
+	public Cart generateFakeCart();
 }

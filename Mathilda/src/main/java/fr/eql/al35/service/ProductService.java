@@ -26,32 +26,38 @@ public class ProductService implements ProductIService {
 	@Autowired
 	private ProductTypeIRepository productTypeRepository;
 
+	//Méthode vérifiée par Mathilda
 	@Override
 	public List<Product> displayAllProducts() {
 		return (List<Product>) productRepository.findAll();
 	}
 
+	//Méthode vérifiée par Mathilda
 	@Override
 	public List<Product> displayAvailableProducts() {
 		return (List<Product>)productRepository.listAvailableProducts();
 	}
 
+	//Méthode vérifiée par Mathilda
 	@Override
 	public Product displayProductById(int id) {
 		Optional<Product> product = productRepository.findById(id);
 		return product.isPresent() ? product.get() : null;
 	}
 
+	//Méthode vérifiée par Mathilda
 	@Override
 	public List<ProductType> displayAllCategories() {
 		return (List<ProductType>)productTypeRepository.findAll();
 	}
 
+	//Méthode vérifiée par Mathilda
 	@Override
 	public List<Product> displayByProductType(ProductType productType) {
 		return (List<Product>) productRepository.findByProductType(productType);
 	}
 
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public Product upDate(Integer id, Product product) {
 		product.setId(id);
@@ -62,6 +68,7 @@ public class ProductService implements ProductIService {
 		return productRepository.save(product);
 	}
 
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public void setDeleteProduct(Integer id) {
 		Optional<Product> product = productRepository.findById(id);
@@ -70,6 +77,7 @@ public class ProductService implements ProductIService {
 		}
 	}
 
+	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public Product addProduct(Product product) {
 		/* ancien code Favori(te)

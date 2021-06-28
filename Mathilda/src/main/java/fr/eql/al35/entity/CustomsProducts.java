@@ -1,6 +1,7 @@
 package fr.eql.al35.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,43 +12,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class CommandCustomProduct implements Serializable {
-
+public class CustomsProducts implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer quantity;
-
+	
 	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="command_id")
-	private Command command;
-
+	@JoinColumn(name="custom_id")
+	private Custom custom;
+	
 	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="customProduct_id")
-	private CustomProduct customProduct;
+	@JoinColumn(name="product_id")
+	private Product product;
 
 	@Override
 	public String toString() {
-		return "CommandCustomProduct [id=" + id + ", quantity=" + quantity + ", command=" + command + ", customProduct="
-				+ customProduct + "]";
+		return "CustomsProducts [id=" + id + ", custom=" + custom + ", product=" + product + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((command == null) ? 0 : command.hashCode());
-		result = prime * result + ((customProduct == null) ? 0 : customProduct.hashCode());
+		result = prime * result + ((custom == null) ? 0 : custom.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		return result;
 	}
 
@@ -59,29 +58,24 @@ public class CommandCustomProduct implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CommandCustomProduct other = (CommandCustomProduct) obj;
-		if (command == null) {
-			if (other.command != null)
+		CustomsProducts other = (CustomsProducts) obj;
+		if (custom == null) {
+			if (other.custom != null)
 				return false;
-		} else if (!command.equals(other.command))
-			return false;
-		if (customProduct == null) {
-			if (other.customProduct != null)
-				return false;
-		} else if (!customProduct.equals(other.customProduct))
+		} else if (!custom.equals(other.custom))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
+		if (product == null) {
+			if (other.product != null)
 				return false;
-		} else if (!quantity.equals(other.quantity))
+		} else if (!product.equals(other.product))
 			return false;
 		return true;
 	}
-
-
+	
+	
 }

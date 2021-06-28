@@ -14,12 +14,12 @@ import org.springframework.context.event.EventListener;
 
 
 @SpringBootApplication
-public class FavoriteApplication {
+public class MathildaApplication {
 	
-	static Logger log = LoggerFactory.getLogger(FavoriteApplication.class);
+	static Logger log = LoggerFactory.getLogger(MathildaApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(FavoriteApplication.class, args);
+		SpringApplication.run(MathildaApplication.class, args);
 		System.out.println("Coucou .. ça va la vie ? ");
 	}
 	

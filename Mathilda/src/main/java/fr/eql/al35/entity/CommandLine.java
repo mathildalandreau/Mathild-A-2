@@ -1,6 +1,7 @@
 package fr.eql.al35.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,40 +18,40 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class CommandProduct implements Serializable {
+public class CommandLine implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer quantity;
-
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="command_id")
-	private Command command;
-
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="product_id")
+	private Integer productQuantity;
+	@ManyToOne ( cascade=CascadeType.MERGE)
+	@JoinColumn(name = "product_id")
 	private Product product;
+	@ManyToOne ( cascade=CascadeType.MERGE)
+	@JoinColumn(name = "command_id")
+	private Command command;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "color_id")
+	private Color color;
 
 	@Override
 	public String toString() {
-		return "CommandProduct [id=" + id + ", quantity=" + quantity + ", command=" + command + ", product=" + product
-				+ "]";
+		return "CommandLine [id=" + id + ", productQuantity=" + productQuantity + ", product=" + product + ", command="
+				+ command + ", color=" + color + "]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((command == null) ? 0 : command.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((productQuantity == null) ? 0 : productQuantity.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,7 +60,12 @@ public class CommandProduct implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CommandProduct other = (CommandProduct) obj;
+		CommandLine other = (CommandLine) obj;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
 		if (command == null) {
 			if (other.command != null)
 				return false;
@@ -75,10 +81,10 @@ public class CommandProduct implements Serializable {
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
+		if (productQuantity == null) {
+			if (other.productQuantity != null)
 				return false;
-		} else if (!quantity.equals(other.quantity))
+		} else if (!productQuantity.equals(other.productQuantity))
 			return false;
 		return true;
 	}

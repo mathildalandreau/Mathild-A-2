@@ -25,7 +25,7 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String reference;
@@ -33,33 +33,30 @@ public class Product implements Serializable {
 	private LocalDateTime refDeletionDate;
 	private String description;
 	private Double price;
-	private Integer quantity; //stock
+	private Integer quantity; // stock
 
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="color_id")
-	private Color color;
-	@ManyToOne( cascade=CascadeType.ALL)
-	@JoinColumn(name="pattern_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pattern_id")
 	private Pattern pattern;
-
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
-	private Set<PhotoProduct> photoProducts;
-
-	@ManyToOne( cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_type_name")
-	private ProductType productType; //pas de changement
+	private ProductType productType; // pas de changement
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dimension_id")
+	private Dimension dimension;
 
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
-	private Set<CustomProduct> customProducts;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private Set<PhotoProduct> photos;
 
-	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
-	private Set<CommandProduct> commandProducts;
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private Set<CustomsProducts> customsProducts;
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", reference=" + reference + ", refCreationDate="
 				+ refCreationDate + ", refDeletionDate=" + refDeletionDate + ", description=" + description + ", price="
-				+ price + ", quantity=" + quantity + ", color=" + color + ", pattern=" + pattern + ", productType="
+				+ price + ", quantity=" + quantity + ", pattern=" + pattern + ", productType="
 				+ productType + "]";
 	}
 
@@ -67,7 +64,6 @@ public class Product implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -90,11 +86,6 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -147,8 +138,5 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-
-
-
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,16 +24,13 @@ public class ProductType implements Serializable {
 
 	@Id
 	private String name;
-	private Double width;
-	private Double height;
-	private Double weight;
 
 	@OneToMany(mappedBy = "productType",  cascade=CascadeType.ALL)
 	private Set<Product> products;
 
 	@Override
 	public String toString() {
-		return  name ;
+		return "ProductType [name=" + name + "]";
 	}
 
 	@Override
@@ -59,4 +57,6 @@ public class ProductType implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 }

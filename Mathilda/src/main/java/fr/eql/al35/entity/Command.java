@@ -50,7 +50,7 @@ public class Command implements Serializable {
 	@JoinColumn(name = "vat_id")
 	private Vat vat;
 
-	@ManyToOne ( cascade=CascadeType.ALL)
+	@ManyToOne ( cascade=CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -61,13 +61,10 @@ public class Command implements Serializable {
 	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="facturation_address_id")
 	private Address facturationAddress;
-
-	@OneToMany (mappedBy="command",  cascade=CascadeType.ALL)
-	private Set<CommandProduct> commandProducts;
-
-	@OneToMany (mappedBy="command",  cascade=CascadeType.ALL)
-	private Set<CommandCustomProduct> commandCustomProducts;
-
+	
+	@OneToMany(mappedBy="command", cascade=CascadeType.MERGE)
+	private Set<CommandLine> commandLines;
+	
 	@Override
 	public String toString() {
 		return "Command [id=" + id + ", reference=" + reference + ", creationDate=" + creationDate + ", shippingDate="

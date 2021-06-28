@@ -31,16 +31,16 @@
 		<div layout:fragment="content">
 			<div class="container">
 			    <div class="row">
-			    	<h3 class="no-article" th:if="${products.size == 0}"> Pas d'article pour le moment</h3>
-
 		            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
 		            	<div class="product-grid mx-1 my-2">
 			                <div class="product-image">
-				                <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
-				                	<img class="pic-1" th:src="@{'/photos/product/' + ${product.photos[0].path}}">
-				                	<img class="pic-2" th:src="@{'/photos/product/' + ${product.photos[1].path}}">
+				               <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
+				               
+				               	<img src=s_h_4.jpg>
+				                
+				                <!-- <img class="pic-1" th:src="@{'/photos/product/' + ${product.photos[0].path}}">
+				                	<img class="pic-2" th:src="@{'/photos/product/' + ${product.photos[1].path}}"> -->	
 				                </a>
-				                <span class="soldout" th:if="${product.quantity == 0}">Rupture de Stock</span>
 			                </div>
 			                <div class="product-content">
 			                    <h3 class="title">

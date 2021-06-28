@@ -29,7 +29,6 @@ public class Custom implements Serializable {
 	private String size;
 	private Double price;
 	private String photo;
-
 	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name="color_id")
 	private Color color;
@@ -39,9 +38,10 @@ public class Custom implements Serializable {
 	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name="location_id")
 	private Location location;
-	@OneToMany(mappedBy = "custom",  cascade=CascadeType.ALL)
-	private Set<CustomProduct> customProducts;
-
+	
+	@OneToMany(mappedBy = "product",  cascade=CascadeType.ALL)
+	private Set<CustomsProducts> customsProducts;
+	
 	@Override
 	public String toString() {
 		return "Custom [id=" + id + ", size=" + size + ", price=" + price + ", color=" + color + ", pattern=" + pattern
