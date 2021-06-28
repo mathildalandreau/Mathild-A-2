@@ -41,7 +41,7 @@
 
 .nav-link-active {
 	text-decoration:none;
-	color : #00010D;
+	color : #AD1E1E;
 	background-color : #B4CBD9;
 	padding : 5px;
 	margin-right : 5px;
@@ -50,5 +50,5 @@
 
 .nav-link-active:hover {
 	text-decoration:none;
-	color : #00010D;
+	color : #AD1E1E;
 }
