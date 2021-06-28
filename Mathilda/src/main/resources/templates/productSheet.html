@@ -60,16 +60,23 @@
 						</div>
 						<div id="product-description" th:text="${product.description}"></div>
 					</div>
-						<!--  <form th:action="@{/addToCart}" th:object="${article}" method="post" th:if="${product.quantity > 0}">
+						  <form th:action="@{/addToCart}" th:object="${commandLine}" method="post" >
 							<div id="formulaire" class="form-group">
 							
-							<div id="product-quantity" class="d-flex col-6"> <span style="margin-right: 10px" class="col-3">Quantité :</span>
-								<input type="number" min=1 th:field="*{quantity}" class="form-control form-control-sm">
+							 <div id="product-quantity" class="d-flex col-6"> <span style="margin-right: 10px" class="col-3">Quantité :</span>
+								<input type="number" min=1 th:field="*{productQuantity}" class="form-control form-control-sm">
 							</div>
 							</div>
+
+							<div id="product-size" class="d-flex col-6"> <span style="margin-right: 10px" class="col-3">Couleur :</span>
+								<select th:field="*{color}" class="form-control form-control-sm">
+									<option th:each="color : ${colors}"  th:value="${color.id}" th:text="${color.label}"></option>
+								</select>
+							</div>
+				
 							<input type="hidden" th:value="${product.id}" name="idProduct" />
-							
-						</form>-->
+							<input type="submit" value="Ajouter au panier" class="btn btn-primary"/>
+						</form>
 					</div>
 				</div>
 			</div>
