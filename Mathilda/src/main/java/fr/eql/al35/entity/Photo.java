@@ -3,12 +3,13 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,8 +30,12 @@ public class Photo implements Serializable {
 	private String path;
 	private String description;
 
-	@OneToMany(mappedBy = "photo",  cascade=CascadeType.ALL)
-	private Set<PhotoProduct> photoProducts;
+	@ManyToMany
+	@JoinTable(
+			name = "photos_products", 
+			joinColumns = @JoinColumn(name = "photo_id"), 
+			inverseJoinColumns = @JoinColumn(name = "product_id"))
+	private Set<Product> products;
 
 	@Override
 	public String toString() {

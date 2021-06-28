@@ -2,14 +2,19 @@ package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.iservice.ProductIService;
@@ -35,9 +40,33 @@ public class ProductService implements ProductIService {
 	//Méthode vérifiée par Mathilda
 	@Override
 	public List<Product> displayAvailableProducts() {
+	
+		/*List<Product> listProducts = (List<Product>)productRepository.listAvailableProducts();
+		int size = listProducts.size();
+		for (int i = 0; i < size; i++) {
+			Set<Photo> photos = sortedPhoto(listProducts.get(i).getPhotos());
+			listProducts.get(i).setPhotos(photos);
+			productRepository.save(listProducts.get(i));
+		}
+		*/
 		return (List<Product>)productRepository.listAvailableProducts();
 	}
 
+	/*private Set<Photo> sortedPhoto(Set<Photo> photos){
+		System.out.println("Liste photos avant treeset" + photos);
+		
+		for (Photo photo : photos) {
+			
+			
+			
+		}
+		System.out.println("Liste photos après treeset" + listPhotos);
+		
+		
+		
+		return listPhotos;
+	}*/
+	
 	//Méthode vérifiée par Mathilda
 	@Override
 	public Product displayProductById(int id) {
