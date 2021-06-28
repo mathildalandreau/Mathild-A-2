@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.entity.ProductType;
+import fr.eql.al35.iservice.ColorIService;
 import fr.eql.al35.iservice.ProductIService;
 
 @Controller
@@ -14,6 +16,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductIService productService;
+	
+	@Autowired
+	private ColorIService colorService;
 
 
 	@GetMapping("/products/all")
@@ -26,19 +31,19 @@ public class ProductController {
 		return "showcase";
 	}
 
-	/*
+
 	@GetMapping("/products/{category}/{id}")
 	public String displayProduct(@PathVariable String category, @PathVariable Integer id, Model model) {
-
-		Article article = new Article();
-
+		
+		CommandLine commandLine = new CommandLine();
+		
+		model.addAttribute("colors", colorService.displayAllColors());
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("categories", productService.displayAllCategories());
-		model.addAttribute("article", article);
-
+		model.addAttribute("commandLine", commandLine);
 		return "productSheet";
 	}
-	 */
+
 	@GetMapping("/products/{productType}")
 	public String displayProductsByType(@PathVariable ProductType productType, Model model) {
 		model.addAttribute("categories", productService.displayAllCategories());
