@@ -12,6 +12,6 @@ public class ResTarif implements Serializable {
 
 	private Transporteur transporteur;
 	private Double price;
-	private Double totalWeight;
+	private Double weight;
 
 }
