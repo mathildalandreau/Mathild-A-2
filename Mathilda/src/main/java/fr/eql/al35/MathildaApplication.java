@@ -24,7 +24,7 @@ public class MathildaApplication {
 	}
 	
 
-	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini
+	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini0
 	@EventListener({ApplicationReadyEvent.class})
 	static void applicationReadyEvent() {
 	    openBrowser("http://localhost:8085/home");

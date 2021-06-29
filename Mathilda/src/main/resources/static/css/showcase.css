@@ -1,7 +1,14 @@
 .container {
     margin-top: 50px;
+    display : flex;
+    flex-wrap : wrap;
+    flex-direction : row-reverse;
 }
 
+.product{
+	flex-basis : 20%;
+	
+}
 h3.h3 {
     text-align: center;
     margin: 1em;
@@ -68,6 +75,10 @@ h3.h3 {
     opacity: 1;
 }
 
+.product-content{
+	height : 8vh;
+	
+}
 .product-grid .product-content {
     padding: 20px 10px;
     text-align: center;
@@ -87,6 +98,7 @@ h3.h3 {
 .product-stock-price{
 	display: flex;
 	justify-content: space-around;
+
 }
 
 .soldout{
@@ -103,4 +115,31 @@ h3.h3 {
     .product-grid{
        margin-bottom: 5vh;
     }
+}
+@media (max-width: 	1400px) {
+    .product{
+	flex-basis : 25%;
+}
+	.product-content{
+	height : 10vh;
+	padding : 1vh;
+	
+}
+}
+
+@media (max-width: 	1000px) {
+    .product{
+	flex-basis : 50%;
+	
+}
+	.product-content{
+	height : 12vh;
+	
+}
+}
+@media (max-width: 	800px) {
+    .product{
+	flex-basis : 100%;
+	
+}
 }
