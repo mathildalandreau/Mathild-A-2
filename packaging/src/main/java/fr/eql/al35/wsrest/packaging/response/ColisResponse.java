@@ -9,5 +9,6 @@ public class ColisResponse {
 	
 	private Double initialWeight;
 	private Double finalWeight;	
-	private String parcel;
+	private String size;
+	private String message; 
 }
