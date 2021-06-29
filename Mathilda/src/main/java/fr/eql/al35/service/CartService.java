@@ -50,9 +50,9 @@ public class CartService implements CartIService {
 	//méthodes publiques : 
 
 	@Override
-	public CommandLine addProduct(Cart cart, Product product, int quantity, Color color) {
+	public CommandLine addProduct(Cart cart, Product product, int quantity, Color color, CommandLine commandLine) {
 		//TODO : a tester(Floriane)
-		CommandLine commandLine = new CommandLine();
+		
 		if (identifyExistingCommandLine(cart, product) != null) {
 			commandLine = identifyExistingCommandLine(cart, product);
 			commandLine.setProductQuantity(commandLine.getProductQuantity() + quantity);
