@@ -34,6 +34,10 @@
 								class="d-flex flex-row align-items-center product-details">
 								<span class="font-weight-bold" th:text="${commandLine.product.name}"></span>
 							</div>
+							<div id="commandLine-color"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold" th:text="${commandLine.color.label}"></span>
+							</div>
 							<div id="article-price"
 								class="d-flex flex-row align-items-center product-details">
 								<span class="font-weight-bold">[[${#numbers.formatCurrency((commandLine.product.price)*(commandLine.productQuantity))}]]</span>
