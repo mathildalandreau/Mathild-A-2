@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.entity.Cart;
-import fr.eql.al35.entity.Color;
-import fr.eql.al35.entity.Product;
+import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.iservice.CartIService;
 
 @Controller
@@ -33,15 +32,14 @@ public class CartController {
 		return "cart";
 	}
 
-	//methode revue par Floriane : ajouter ds html quantityProduct
-	//voire pour refaire en injectant direct une commandLine dans la méthode ?
+	//ok verifiée par Floriane
 	@PostMapping("/addToCart")
-	public String displayAddToCart(@ModelAttribute("commandLine") Product product, 
-			@RequestParam("productQuantity") int quantityProduct,
-			@RequestParam("color") Color colorProduct,
+	public String displayAddToCart(@ModelAttribute("commandLine") CommandLine commandLine, 
+			@RequestParam("idProduct") Integer idProduct,
 			Model model, HttpSession session) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		cartService.addProduct(sessionCart, product, quantityProduct, colorProduct);
+		commandLine = cartService.addProductToCommandLine(idProduct, commandLine); //update la commandLine
+		cartService.updateCommandLine(sessionCart, commandLine); //uptate le cart
 		return "redirect:/products/all";
 	}
 

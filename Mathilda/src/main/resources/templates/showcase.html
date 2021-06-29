@@ -32,7 +32,7 @@
 			<div class="container">
 			    <div class="row">
 			    
-			    	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
+			    	<div class="product " th:each="product : ${products}" th:unless="${product.refDeletionDate}">
 		            	<div class="product-grid mx-1 my-2">
 			                <div class="product-image">
 				                <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
@@ -52,7 +52,7 @@
 			             </div>
 		            </div>
 
-			    </div>
+			   </div> 
 			</div>
 		</div>
 	</body>
