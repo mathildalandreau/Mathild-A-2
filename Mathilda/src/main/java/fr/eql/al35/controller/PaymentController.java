@@ -1,5 +1,6 @@
 package fr.eql.al35.controller;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.dto.Colis;
 import fr.eql.al35.dto.Tarif;
@@ -60,13 +62,18 @@ public class PaymentController {
 	@GetMapping("/choixTransporteur")
 	public String displayTransporteur(Model model, HttpSession session) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		Colis colis = new Colis();
 		Double initialWeight = cmdService.calculateInitialWeight(sessionCart);
-		Double finalWeight = initialWeight; //ajout Romain
+		colis.setInitialWeight(initialWeight);
+		colis = colisServiceDelegate.getPoids(colis);
+		model.addAttribute("colis", colis);// peut etre pas necessaire
+		model.addAttribute("tarif", new Tarif());
 		try {
-			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(finalWeight); //essai avec un poids en dur en dur
+			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(25.6);  //////A CHANGER ICI :colis.getFinalWeight() ///////////
 			model.addAttribute("tarifs", tarifs);
-			System.out.println("taille liste tarifs : " + tarifs.size());
-			System.out.println("un tarif " + tarifs.get(0).toString()); //ICI OK ON A BIEN RECUP LE TARIF
+			for (Tarif tarif : tarifs) {
+				System.out.println(tarif.toString());
+			}
 		} catch (Exception e) {
 			System.out.println("WS transport HS ..?");
 		}
@@ -74,8 +81,12 @@ public class PaymentController {
 	}
 
 	@PostMapping("/goToPayment")
-	public String postMappingChoixTransporteur(Model model, HttpSession session) {
-		//
+	public String postMappingChoixTransporteur(Model model, HttpSession session,
+			@RequestParam("idTarif") Integer idTarif) {
+		//a resoudre : 
+		System.out.println("idTarif : " + idTarif);
+		
+		//a continuer en ajoutant le reste
 		return "redirect:payment";
 	}
 
