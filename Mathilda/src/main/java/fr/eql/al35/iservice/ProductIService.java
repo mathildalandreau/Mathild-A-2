@@ -14,6 +14,7 @@ public interface ProductIService {
 	List<Product> displayByProductType(ProductType productType);
 	Product upDate(Integer id, Product product);
 	void setDeleteProduct(Integer id);
+	void setUndeleteProduct(Integer id);
 	Product addProduct(Product product);
 
 }

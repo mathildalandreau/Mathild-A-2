@@ -1,6 +1,5 @@
 package fr.eql.al35.controller;
 
-import java.nio.file.spi.FileSystemProvider;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -85,7 +84,7 @@ public class PaymentController {
 			@RequestParam("idTarif") Integer idTarif) {
 		//a resoudre : 
 		System.out.println("idTarif : " + idTarif);
-		
+
 		//a continuer en ajoutant le reste
 		return "redirect:payment";
 	}

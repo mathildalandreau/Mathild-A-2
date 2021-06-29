@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
+import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.AdminIService;
 import fr.eql.al35.iservice.CommandIService;
 import fr.eql.al35.iservice.PhotoIService;
 import fr.eql.al35.iservice.ProductIService;
+import fr.eql.al35.repository.StatusIRepository;
 
 @Controller
 public class AdminController {
@@ -38,6 +40,9 @@ public class AdminController {
 
 	@Autowired
 	private PhotoIService photoService;
+	
+	@Autowired
+	private StatusIRepository statusRepository;
 
 	@GetMapping("/admin/product")
 	public String displayAdminProduct( Model model) {
@@ -147,6 +152,7 @@ public class AdminController {
 		return "adminCommand";
 	}
 
+	/*
 	@PostMapping("/upDateCommands")
 	public String upDateCommands(@ModelAttribute("command")Command command, Model model) {
 		commandService.updateCommand(command);
@@ -157,18 +163,17 @@ public class AdminController {
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
 	}
+*/
 
-	/* ancienne méthode Favori(te)
 	@GetMapping("/admin/products/{id}")
 	public String displayProduct(@PathVariable Integer id, Model model) {
-		Stock stock = new Stock();
-		model.addAttribute("stock", stock);
+	
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("productTypes", productService.displayAllCategories());
 		model.addAttribute("index", 0);
 		return "adminProductInfo";
 	}
-	 */
+	
 
 	@GetMapping("/admin/products/delete/{id}")
 	public String deleteProduct(@PathVariable Integer id, Model model) {
@@ -176,12 +181,18 @@ public class AdminController {
 		productService.setDeleteProduct(id);
 		return "adminProducts";
 	}
+	
+	@GetMapping("/admin/products/undelete/{id}")
+	public String undeleteProduct(@PathVariable Integer id, Model model) {
+		model.addAttribute("products", productService.displayAllProducts());
+		productService.setUndeleteProduct(id);
+		return "adminProducts";
+	}
 
 	@GetMapping("/admin/product/add")
 	public String adminAddProduct( Model model) {
 		Product product = new Product();
 		model.addAttribute("product", product);
-
 		model.addAttribute("productTypes", productService.displayAllCategories());
 		return "adminAddProduct";
 	}
@@ -192,4 +203,27 @@ public class AdminController {
 		model.addAttribute("products", productService.displayAllProducts());
 		return "adminProducts";
 	}
+	
+	@GetMapping("/adminMyOrders")
+	public String userCommands(Model model) {
+		model.addAttribute("commands", commandService.displayAllCommands());
+		return "adminMyOrders";
+	}
+	
+	/*  par Mathilda, ne marche pas encore
+	@GetMapping("/admin/updateOrder")
+	public String updateCommand(Model model, @ModelAttribute("idCommand") Integer id, @ModelAttribute("action") String action ) {
+
+		Status status = statusRepository.findByName(action);
+		
+		System.out.println("status : " + status.getName());
+		
+		Command command = commandService.displaybyId(id);
+		
+		System.out.println("command : " + command);
+		
+		commandService.updateCommand(command, status);
+		model.addAttribute("commands", commandService.displayAllCommands());
+		return "adminMyOrders";
+	}*/
 }

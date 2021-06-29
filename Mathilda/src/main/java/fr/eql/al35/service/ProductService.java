@@ -40,32 +40,9 @@ public class ProductService implements ProductIService {
 	//Méthode vérifiée par Mathilda
 	@Override
 	public List<Product> displayAvailableProducts() {
-	
-		/*List<Product> listProducts = (List<Product>)productRepository.listAvailableProducts();
-		int size = listProducts.size();
-		for (int i = 0; i < size; i++) {
-			Set<Photo> photos = sortedPhoto(listProducts.get(i).getPhotos());
-			listProducts.get(i).setPhotos(photos);
-			productRepository.save(listProducts.get(i));
-		}
-		*/
 		return (List<Product>)productRepository.listAvailableProducts();
 	}
 
-	/*private Set<Photo> sortedPhoto(Set<Photo> photos){
-		System.out.println("Liste photos avant treeset" + photos);
-		
-		for (Photo photo : photos) {
-			
-			
-			
-		}
-		System.out.println("Liste photos après treeset" + listPhotos);
-		
-		
-		
-		return listPhotos;
-	}*/
 	
 	//Méthode vérifiée par Mathilda
 	@Override
@@ -90,19 +67,27 @@ public class ProductService implements ProductIService {
 	@Override
 	public Product upDate(Integer id, Product product) {
 		product.setId(id);
-		String now = "2021-01-01 10:30";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
-		product.setRefCreationDate(formatDateTime);
+		LocalDateTime now = product.getRefCreationDate();
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		//LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
+		product.setRefCreationDate(now);
 		return productRepository.save(product);
 	}
 
-	//Méthode ADMIN NON PRIORITAIRE 
+
 	@Override
 	public void setDeleteProduct(Integer id) {
 		Optional<Product> product = productRepository.findById(id);
 		if(product.isPresent()) {
 			product.get().setRefDeletionDate(LocalDateTime.now());
+		}
+	}
+	
+	@Override
+	public void setUndeleteProduct(Integer id) {
+		Optional<Product> product = productRepository.findById(id);
+		if(product.isPresent()) {
+			product.get().setRefDeletionDate(null);
 		}
 	}
 
