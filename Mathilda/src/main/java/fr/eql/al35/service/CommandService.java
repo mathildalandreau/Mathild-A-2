@@ -146,19 +146,24 @@ public class CommandService implements CommandIService {
 	}
 
 
-
-
+	@Override
+	public Command updateCommand(Command command, Status status) {
+		addressRepo.save(command.getDeliveryAddress());
+		addressRepo.save(command.getFacturationAddress());
+		cityRepo.save(command.getDeliveryAddress().getCity());
+		cityRepo.save(command.getFacturationAddress().getCity());
+		payModeRepo.save(command.getPayMode());
+		vatRepo.save(command.getVat());
+		command.setStatus(status);
+		statusRepo.save(command.getStatus());
+		return cmdRepo.save(command);
+		
+		
+	}
 
 	/*
 	 * Pas encore retouchées :
 	 */
-
-	@Override
-	public Command updateCommand(Command command) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	/*
 	 * 	@Override

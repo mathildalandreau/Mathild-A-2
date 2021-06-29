@@ -37,6 +37,9 @@ public class Command implements Serializable {
 	private LocalDateTime deliveryReturnDate;
 	private Double taxInPrice;
 	private Double taxOutPrice;
+	private Double sendingPrice;
+	private String transporteur; 
+	private Double finalWeight; 
 
 	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "status_id")
