@@ -94,6 +94,21 @@ INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gil
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_2', 's_g_2.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_3', 's_g_3.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_4', 's_g_4.JPG');
+<<<<<<< HEAD
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_1', 's_cp_1.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_2', 's_cp_2.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_3', 's_cp_3.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_4', 's_cp_4.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_habit', 'petit_h_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_robe', 'petit_r_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_paniers', 'petit_p_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_gilet', 'petit_g_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_corpspique', 'petit_cp_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_habit', 'grand_h_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_robe', 'grand_r_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_paniers', 'grand_p_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_gilet', 'grand_g_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_corpspique', 'grand_cp_r.pg');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_1', 's_cp_1.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_2', 's_cp_2.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_3', 's_cp_3.JPG');

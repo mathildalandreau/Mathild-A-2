@@ -27,9 +27,11 @@ public class ColisService implements ColisIService {
 
 	@Override
 	public Colis getFinalWeight(Colis colis) {
+		
 		if (colis.getInitialWeight() <= 0.5) {
 			Parcel parcel = parcelRepository.findById(1).get();
 			colis.setParcel(parcel);
+			System.out.println(colis.toString());
 			colis.setFinalWeight(colis.getInitialWeight() + colis.getParcel().getWeight());
 			return colis;
 		}
@@ -53,8 +55,7 @@ public class ColisService implements ColisIService {
 			colis.setParcel(parcel);
 			colis.setFinalWeight(colis.getInitialWeight() + colis.getParcel().getWeight());
 			return colis;
-		}
-		
+		} 
 		return null;
 	}
 

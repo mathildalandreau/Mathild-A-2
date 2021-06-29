@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" xmlns="http://www.w3.org/2000/svg">
+<head>
+<meta charset="ISO-8859-1">
+<title>Tarifs By Transporteur</title>
+</head>
+<body>
+	<div layout:fragment="content" style="flex-direction: column">
+		<div th:each="tarif : ${tarifs}">
+			<div>
+				<span
+					th:text="'Prix : ' + ${tarif.price} + ' - transporteur : ' + ${tarif.transporteur.name}">
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
