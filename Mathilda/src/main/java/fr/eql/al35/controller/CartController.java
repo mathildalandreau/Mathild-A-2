@@ -32,8 +32,7 @@ public class CartController {
 		return "cart";
 	}
 
-	//methode revue par Floriane : ajouter ds html quantityProduct
-	//voire pour refaire en injectant direct une commandLine dans la méthode ?
+	//ok verifiée par Floriane
 	@PostMapping("/addToCart")
 	public String displayAddToCart(@ModelAttribute("commandLine") CommandLine commandLine, 
 			@RequestParam("idProduct") Integer idProduct,

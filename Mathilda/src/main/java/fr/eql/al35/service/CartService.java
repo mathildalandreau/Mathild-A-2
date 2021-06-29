@@ -124,38 +124,14 @@ public class CartService implements CartIService {
 		return commandLine;
 	}
 
-
-
-
-
-
-
-
-	//vieilles :
-	/*
 	@Override
-	public CommandLine addProduct(Cart cart, Product product, int quantity, Color color) {
-		//TODO : a tester(Floriane)
-		CommandLine commandLine = new CommandLine();
-		if (identifyExistingCommandLine(cart, product) != null) {
-			commandLine = identifyExistingCommandLine(cart, product);
-			commandLine.setProductQuantity(commandLine.getProductQuantity() + quantity);
-
-		} else {
-			commandLine = createNewCommandLine(cart, product, quantity, color);
-		}
-		System.out.println("avant updateCart");
-		updateCart(cart);
-		return commandLine;
-	}
-
-
-		@Override
 	public void removeCommandLine(Cart cart, CommandLine commandLine) {
 		// TODO a implémenter
 		//Floriane : trouver à quoi sert cette méthode 
 		//et comment l'adapter avec la nouvelle structure
 	}
-	 */
+
+
+
 
 }

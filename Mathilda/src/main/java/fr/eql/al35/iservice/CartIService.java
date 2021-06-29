@@ -9,10 +9,10 @@ public interface CartIService {
 
 	//methodes services refaites par : Floriane
 
+	public Cart generateFakeCart();
 	public CommandLine addProductToCommandLine(Integer id, CommandLine commandLine);
 	public Cart updateCommandLine(Cart cart, CommandLine commandLine);
 	public Product getProduct(Cart cart, int index);
-	public Cart generateFakeCart();
+	public void removeCommandLine(Cart cart, CommandLine commandLine);
 
-	//public CommandLine addProduct(Cart cart, Product product, int quantity, Color color);
 }
