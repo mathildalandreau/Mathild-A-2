@@ -94,6 +94,7 @@ INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gil
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_2', 's_g_2.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_3', 's_g_3.JPG');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_gilet_4', 's_g_4.JPG');
+<<<<<<< HEAD
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_1', 's_cp_1.pg');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_2', 's_cp_2.pg');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_3', 's_cp_3.pg');
@@ -108,6 +109,20 @@ INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_r
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_paniers', 'grand_p_r.pg');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_gilet', 'grand_g_r.pg');
 INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_corpspique', 'grand_cp_r.pg');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_1', 's_cp_1.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_2', 's_cp_2.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_3', 's_cp_3.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('serviette_corps_pique_4', 's_cp_4.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_habit', 'petit_h_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_robe', 'petit_r_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_paniers', 'petit_p_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_gilet', 'petit_g_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_petit_corpspique', 'petit_cp_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_habit', 'grand_h_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_robe', 'grand_r_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_paniers', 'grand_p_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_gilet', 'grand_g_r.JPG');
+INSERT INTO `mathilda_db`.`photo` (`description`, `path`) VALUES ('motif_grand_corpspique', 'grand_cp_r.JPG');
 INSERT INTO `mathilda_db`.`product` (`description`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `dimension_id`, `pattern_id`, `product_type_name`) VALUES ('Serviette brodée à l''atelier. Tissu en lin bio français, tissé en Belgique.', 'Serviette - Habit', '15', '5', '2021-01-01', '020101', '2', '1', 'Serviette');
 INSERT INTO `mathilda_db`.`product` (`description`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `dimension_id`, `pattern_id`, `product_type_name`) VALUES ('Serviette brodée à l''atelier. Tissu en lin bio français, tissé en Belgique.', 'Serviette - Robe', '15', '7', '2021-01-01', '020201', '2', '2', 'Serviette');
 INSERT INTO `mathilda_db`.`product` (`description`, `name`, `price`, `quantity`, `ref_creation_date`, `reference`, `dimension_id`, `pattern_id`, `product_type_name`) VALUES ('Serviette brodée à l''atelier. Tissu en lin bio français, tissé en Belgique.', 'Serviette - Panier', '15', '2', '2021-01-01', '020301', '2', '3', 'Serviette');

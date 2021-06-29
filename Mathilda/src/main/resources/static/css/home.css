@@ -26,19 +26,20 @@
 	font-size : 60px;
 	white-space : nowrap;
 	overflow : hidden;
-	color : #254B59;
+	color : #AD1E1E;
 }
 
 .content a{
 	font-size : 18px;
 	display : block;
-	background-color : #254B59;
+	background-color : #E28787;
 	text-align : center;
 	padding : 5px;
 	cursor : pointer;
 	text-decoration:none; 
 	color : #F2F2F2
 }
+
 
 .overlay {
 	opacity:0;

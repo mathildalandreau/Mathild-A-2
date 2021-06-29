@@ -56,9 +56,11 @@ public class CartService implements CartIService {
 		if (identifyExistingCommandLine(cart, product) != null) {
 			commandLine = identifyExistingCommandLine(cart, product);
 			commandLine.setProductQuantity(commandLine.getProductQuantity() + quantity);
+
 		} else {
 			commandLine = createNewCommandLine(cart, product, quantity, color);
 		}
+		System.out.println("avant updateCart");
 		updateCart(cart);
 		return commandLine;
 	}
@@ -83,8 +85,11 @@ public class CartService implements CartIService {
 
 	//méthodes privées : 
 	private void updateCart(Cart cart) {
+		System.out.println("début updateCart");
 		updateArticleQuantity(cart);
+		System.out.println("après updateArticleQuantity");
 		updateTotalPrice(cart);
+		System.out.println("après updatetotalprice");
 	}
 
 	private void updateArticleQuantity(Cart cart) {
@@ -97,6 +102,8 @@ public class CartService implements CartIService {
 
 	private void updateTotalPrice(Cart cart) {
 		double total = 0d;
+		System.out.println("dans updateTotalPrice");
+		System.out.println(cart.toString());
 		for (CommandLine commandLine : cart.getCommandLines()) {
 			total = total + commandLine.getProduct().getPrice() * commandLine.getProductQuantity();
 		}

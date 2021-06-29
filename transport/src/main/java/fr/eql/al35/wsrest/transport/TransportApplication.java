@@ -10,6 +10,8 @@ public class TransportApplication {
 		SpringApplication.run(TransportApplication.class, args);
 		
 		System.out.println("http://localhost:8086");
+		System.out.println("http://localhost:8086/transport-rest/allTarifs.html");
+		
 	}
 
 }

@@ -31,21 +31,15 @@
 		<div layout:fragment="content">
 			<div class="container">
 			    <div class="row">
-		            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
+			    
+			    	<div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" th:each="product : ${products}" th:unless="${product.refDeletionDate}">
 		            	<div class="product-grid mx-1 my-2">
-		            
-			               <div class="product-image">
-				               <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
-				               
-				              
-				                	  <!-- 	<img class="pic-1" th:src="@{'/photos/product/' + s_h_4.JPG}"> -->
-				                	  
-
-				                	  
-				               <img class="pic-1" th:src="@{'/photos/product/' + ${product.photos[0].path}}">
-				                	<img class="pic-2" th:src="@{'/photos/product/' + ${product.photos[1].path}}"> 
+			                <div class="product-image">
+				                <a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}"> 
+				                	<img class="pic-1" th:src="@{'/photos/product/' + ${product.photos[0].path}}">
+				                	<img class="pic-2" th:src="@{'/photos/product/' + ${product.photos[1].path}}">
 				                </a>
-			                </div>	
+			                </div>
 			                <div class="product-content">
 			                    <h3 class="title">
 			                    	<a th:href="@{'/products/' + ${product.productType.name} + '/{id}'(id=${product.id})}" th:text="${product.name}"></a>
@@ -57,6 +51,7 @@
 			                </div>
 			             </div>
 		            </div>
+
 			    </div>
 			</div>
 		</div>

@@ -2,8 +2,8 @@ package fr.eql.al35.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -50,7 +50,7 @@ public class Product implements Serializable {
 	private Dimension dimension;
 
 	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
-	private Set<Photo> photos;
+	private List<Photo> photos;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<CustomsProducts> customsProducts;
