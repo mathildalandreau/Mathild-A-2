@@ -36,7 +36,7 @@ public class ColisRest {
 
 		ColisResponse response = new ColisResponse();
 		//n'appelle pas le service si le poids entré est null ou trop lourd
-		if (colis.getInitialWeight() == 0 || colis.getInitialWeight() >= 23 ) {
+		if (colis.getInitialWeight() == 0 || colis.getInitialWeight() >= 70 ) {
 			response.setMessage("Poids incorrect");
 			return response;	
 		} else 

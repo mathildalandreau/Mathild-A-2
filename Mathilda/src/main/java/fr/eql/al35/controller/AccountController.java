@@ -41,42 +41,6 @@ public class AccountController {
 		return "home";
 	}
 
-	/*
-	private void generateCartEnDur(Model model) {
-		//crée produits :
-		Product product1 = new Product();
-		product1.setName("TOTO");
-		product1.setPrice(10d);
-		Product product2= new Product();
-		product2.setName("TUTU");
-		product2.setPrice(12d);
-
-		//crée des commandLines:
-		CommandLine cl1 = new CommandLine();
-		cl1.setProduct(product1);
-		cl1.setProductQuantity(2);
-		CommandLine cl2 = new CommandLine();
-		cl2.setProduct(product2);
-		cl2.setProductQuantity(1);
-		Set<CommandLine> commandLines = new HashSet<CommandLine>();
-		commandLines.add(cl1);
-		commandLines.add(cl2);
-
-		//crée un cart fictif:
-		Cart cart = new Cart();
-		cart.setCommandLines(commandLines);
-		cart.setArticlesQuantity(3);
-		double price = 0;
-		for (CommandLine commandLine : commandLines) {
-			price += commandLine.getProductQuantity()*commandLine.getProduct().getPrice();
-		}
-		cart.setPrice(price);
-
-		//on le met en session
-		model.addAttribute("sessionCart", cart);
-	}
-	 */
-
 	@GetMapping("/switchAdmin")
 	public String switchAdminAccount(Model model, HttpSession session) {
 

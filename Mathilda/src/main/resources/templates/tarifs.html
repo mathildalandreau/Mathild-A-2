@@ -8,6 +8,15 @@
 </head>
 <body>
 	<div layout:fragment="content" style="flex-direction: column">
+		<div>
+			<span
+				th:text="'Poids initial : ' + ${colis.initialWeight} +'kg'">
+			</span>
+			<span
+				th:text="'Poids final  :' + ${colis.finalWeight} +'kg'">
+			</span>
+		</div>
+		<hr>
 		<div th:each="tarif : ${tarifs}">
 			<div>
 				<span
@@ -16,5 +25,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
