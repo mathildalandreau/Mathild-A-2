@@ -22,6 +22,7 @@ import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.ColisService;
 import fr.eql.al35.iservice.CommandIService;
+import fr.eql.al35.service.CartService;
 import fr.eql.al35.service.ColisServiceDelegate;
 
 @Controller
@@ -38,6 +39,7 @@ public class PaymentController {
 	@Autowired
 	ColisService colisServiceDelegate;
 
+	//temporaire pour tester, à enlever ensuite
 	@GetMapping("/tarifs")
 	public String displayTarifs(Model model) {
 		try {
@@ -49,6 +51,29 @@ public class PaymentController {
 			System.out.println("WS transport HS ..?");
 		}
 		return "tarifs";
+	}
+
+
+	@GetMapping("/choixTransporteur")
+	public String displayTransporteur(Model model, HttpSession session) {
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		Double initialWeight = cmdService.calculateInitialWeight(sessionCart);
+		Double finalWeight = initialWeight; //ajout Romain
+		try {
+			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(finalWeight); //essai avec un poids en dur en dur
+			model.addAttribute("tarifs", tarifs);
+			System.out.println("taille liste tarifs : " + tarifs.size());
+			System.out.println("un tarif " + tarifs.get(0).toString()); //ICI OK ON A BIEN RECUP LE TARIF
+		} catch (Exception e) {
+			System.out.println("WS transport HS ..?");
+		}
+		return "choixTransporteur";
+	}
+
+	@PostMapping("/goToPayment")
+	public String postMappingChoixTransporteur(Model model, HttpSession session) {
+		//
+		return "redirect:payment";
 	}
 
 

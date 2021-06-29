@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Choix Transporteur</title>
+<link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div id="divParentChoixTransporteur">
+			<a id="lienPanier" href="/products/all">Poursuivre mes Achats</a>
+			<form id="choix-transporteur_formRadioButton">
+				<div class="form-check">
+					<input class="form-check-input" type="radio"
+						name="flexRadioDefault" id="flexRadioDefault2" checked> <label
+						class="form-check-label" for="flexRadioDefault2"> Default
+						checked radio </label>
+				</div>
+					<div th:each="tarif : ${tarifs}">
+			<div>
+				<span
+					th:text="'Prix : ' + ${tarif.price} + ' - transporteur : ' + ${tarif.transporteur.name}">
+				</span>
+			</div>
+		</div>
+			</form>
+			<button id="btnChoixTransporteur" class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+							type="button" onclick="window.location.href = '/payment';">Proceder
+							au paiment</button>
+		</div>
+	</div>
+
+
+</body>
+</html>
