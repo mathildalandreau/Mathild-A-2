@@ -1,7 +1,6 @@
 package fr.eql.al35.wsrest.transport.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,11 +26,10 @@ public class Colis implements Serializable {
 	private Integer id;
 	private Double weight;
 	private Double price;
-	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "transporteur_id")
 	private Transporteur transporteur;
-	
+
 	@Override
 	public String toString() {
 		return "Colis [id=" + id + ", weight=" + weight + ", price=" + price + ", transporteur=" + transporteur + "]";

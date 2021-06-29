@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
-import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
@@ -66,8 +65,7 @@ public class CommandService implements CommandIService {
 	@Autowired
 	ProductIRepository productRepo;
 
-	//méthode publiques : 
-
+	//méthode publiques :
 
 	@Override
 	public Command createCommand(Cart cart, User sessionUser) {

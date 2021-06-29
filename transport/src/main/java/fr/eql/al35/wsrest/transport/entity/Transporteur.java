@@ -1,7 +1,7 @@
 package fr.eql.al35.wsrest.transport.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class Transporteur implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "transporteur",  cascade=CascadeType.ALL)
-	private Set<Tarif> tarifs;
+	private List<Tarif> tarifs;
 
 	@Override
 	public String toString() {
