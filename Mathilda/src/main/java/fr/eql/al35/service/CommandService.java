@@ -83,6 +83,10 @@ public class CommandService implements CommandIService {
 		command.setTransporteur(cart.getTransporteur());
 		command.setFinalWeight(cart.getPoidsColis());
 		cmdRepo.save(command); //enregistrer en BDD
+		for (CommandLine cmdLine : cart.getCommandLines()) {
+			cmdLine.setCommand(command);
+			cmdLineRepo.save(cmdLine);
+		}
 		return command;
 	}
 

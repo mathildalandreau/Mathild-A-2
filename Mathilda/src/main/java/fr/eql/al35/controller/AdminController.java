@@ -1,6 +1,7 @@
 package fr.eql.al35.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -206,7 +207,9 @@ public class AdminController {
 	
 	@GetMapping("/adminMyOrders")
 	public String userCommands(Model model) {
-		model.addAttribute("commands", commandService.displayAllCommands());
+		List<Command> commands = commandService.displayAllCommands();
+		commands.sort((o2,o1) -> o1.getCreationDate().compareTo(o2.getCreationDate()));
+		model.addAttribute("commands", commands);
 		return "adminMyOrders";
 	}
 	
