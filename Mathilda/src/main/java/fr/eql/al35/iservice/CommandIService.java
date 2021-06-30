@@ -11,7 +11,7 @@ public interface CommandIService {
 
 	//methodes services refaites par : Floriane
 
-	public Command createCommand(Cart cart, User sessionUser);
+	public Command createCommand(Command command, Cart cart, User sessionUser);
 	public List<Command> findByUser(Integer user);
 	public Command displaybyId(Integer id);
 	List<Command> displayAllCommands();

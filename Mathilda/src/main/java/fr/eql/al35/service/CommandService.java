@@ -69,15 +69,12 @@ public class CommandService implements CommandIService {
 	//méthode publiques :
 
 	@Override
-	public Command createCommand(Cart cart, User sessionUser) {
-		Command command = new Command();
-		//reference
-		command.setReference(writeReference(sessionUser));
+	public Command createCommand(Command command, Cart cart, User sessionUser) {
+		command.setReference(writeReference(sessionUser)); //reference
 		setCreationDateAndStatus(command); //creationDate et status
 		command.setTaxOutPrice((double) (Math.round(cart.getPrice()*100) / 100)); //taxOutPrice
 		setVatAndTaxInPrice(command); //vat and taxPrice
 		command.setUser(sessionUser); //user
-		setAddresses(command); // à implémenter: deliveryAddress and facturationAddress
 		command.setCommandLines(cart.getCommandLines()); //commandLines
 		command.setSendingPrice(cart.getSendingPrice());
 		command.setTransporteur(cart.getTransporteur());
@@ -128,11 +125,6 @@ public class CommandService implements CommandIService {
 		Optional<Status> status = statusRepo.findById(1);
 		command.setStatus(status.isPresent() ? status.get() : null);
 	}
-
-	private void setAddresses(Command command) {
-		//a implémenter 
-	}
-
 
 	private void setVatAndTaxInPrice(Command command) {
 		Optional<PayMode> paymode = payModeRepo.findById(1);
