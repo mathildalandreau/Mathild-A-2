@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.dto.Colis;
 import fr.eql.al35.dto.Tarif;
@@ -21,6 +22,7 @@ import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.ColisService;
 import fr.eql.al35.iservice.CommandIService;
+
 
 @Controller
 public class PaymentController {
@@ -36,6 +38,7 @@ public class PaymentController {
 	@Autowired
 	ColisService colisServiceDelegate;
 
+	//temporaire pour tester, à enlever ensuite
 	@GetMapping("/tarifs")
 	public String displayTarifs(Model model) {
 		try {
@@ -52,6 +55,38 @@ public class PaymentController {
 			System.out.println("WS transport HS ..?");
 		}
 		return "tarifs";
+	}
+
+
+	@GetMapping("/choixTransporteur")
+	public String displayTransporteur(Model model, HttpSession session) {
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		Colis colis = new Colis();
+		Double initialWeight = cmdService.calculateInitialWeight(sessionCart);
+		colis.setInitialWeight(initialWeight);
+		colis = colisServiceDelegate.getPoids(colis);
+		model.addAttribute("colis", colis);// peut etre pas necessaire
+		model.addAttribute("tarif", new Tarif());
+		try {
+			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(25.6);  //////A CHANGER ICI :colis.getFinalWeight() ///////////
+			model.addAttribute("tarifs", tarifs);
+			for (Tarif tarif : tarifs) {
+				System.out.println(tarif.toString());
+			}
+		} catch (Exception e) {
+			System.out.println("WS transport HS ..?");
+		}
+		return "choixTransporteur";
+	}
+
+	@PostMapping("/goToPayment")
+	public String postMappingChoixTransporteur(Model model, HttpSession session,
+			@RequestParam("idTarif") Integer idTarif) {
+		//a resoudre : 
+		System.out.println("idTarif : " + idTarif);
+
+		//a continuer en ajoutant le reste
+		return "redirect:payment";
 	}
 
 

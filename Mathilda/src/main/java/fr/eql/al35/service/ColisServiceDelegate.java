@@ -48,7 +48,7 @@ public class ColisServiceDelegate implements ColisService {
 	//envoi d'une requête POST au WS pour récupérer le poids final du colis
 	@Override
 	public Colis getPoids(Colis colis) {
-		colis =restTemplate.postForObject(url, colis, Colis.class);	
+		colis = restTemplate.postForObject(url, colis, Colis.class);	
 		return colis; 
 	}
 }

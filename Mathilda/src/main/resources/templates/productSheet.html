@@ -96,10 +96,11 @@
 
 							<div id="product-size" class="d-flex col-6">
 								<span style="margin-right: 10px" class="col-3">Couleur :</span>
-								<select th:field="${commandLine.color}"
-									class="form-control form-control-sm">
-									<option th:each="color : ${colors}" th:value="${color.id}"
-										th:text="${color.label}"></option>
+								<select th:field="${commandLine.color}" class="form-control form-control-sm">
+									<option th:each="color : ${colors}"
+											th:value="${color.id}"
+											th:text="${color.label}">
+									</option>
 								</select>
 							</div>
 

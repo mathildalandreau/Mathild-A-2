@@ -6,8 +6,8 @@
 .card{
 	padding : 1vh;
 	margin: 1vh;
-	background-color : #B4CBD9;
-	border: 1px solid #254B59;
+	background-color : #F5F2DF;
+	border: 1px solid #DED2BF;
 
 }
 
@@ -55,7 +55,11 @@
 #card-button-12,
 #card-button-13,
 #card-button-14 ,
-#card-button-15 {
+#card-button-15,
+#card-button-16,
+#card-button-17,
+#card-button-18,
+#card-button-19{
 	padding : 0.75vh;
 	background-color : #E28787;
 	border : none;
@@ -64,7 +68,7 @@
 
 }
 
-#card-button-8, #card-button-9 {
+#card-button-8, #card-button-9, #card-button-18 {
 	min-width : 140px;
 	width : 20vw;
 	height : 16vh;
@@ -134,10 +138,12 @@ display : flex;
 }
 
 .unsubscribe-button{
-	background-color: red !important;
+	background-color: #B01E1B !important;
 }
 
 .subscribe-button{
-	background-color: green !important;;
+	background-color: #52A752 !important;;
 }
 
+
+ 
