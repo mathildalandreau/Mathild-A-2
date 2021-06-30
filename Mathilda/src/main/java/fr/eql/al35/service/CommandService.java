@@ -79,7 +79,14 @@ public class CommandService implements CommandIService {
 		command.setUser(sessionUser); //user
 		setAddresses(command); // à implémenter: deliveryAddress and facturationAddress
 		command.setCommandLines(cart.getCommandLines()); //commandLines
+		command.setSendingPrice(cart.getSendingPrice());
+		command.setTransporteur(cart.getTransporteur());
+		command.setFinalWeight(cart.getPoidsColis());
 		cmdRepo.save(command); //enregistrer en BDD
+		for (CommandLine cmdLine : cart.getCommandLines()) {
+			cmdLine.setCommand(command);
+			cmdLineRepo.save(cmdLine);
+		}
 		return command;
 	}
 
@@ -168,40 +175,5 @@ public class CommandService implements CommandIService {
 		return cmdRepo.save(command);
 
 	}
-
-
-	/*
-	 * Pas encore retouchées :
-	 */
-
-	/*
-	 * 	@Override
-	public Command updateCommand(Command command) {
-		addressRepo.save(command.getDeliveryAddress());
-		addressRepo.save(command.getFacturationAddress());
-		cityRepo.save(command.getDeliveryAddress().getCity());
-		cityRepo.save(command.getFacturationAddress().getCity());
-		payModeRepo.save(command.getPayMode());
-		vatRepo.save(command.getVat());
-		statusRepo.save(command.getStatus());
-		return cmdRepo.save(command);
-	}
-	 */
-
-
-	/*
-	 * 	@Override
-	public Command saveCommand(Command command) {
-		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
-		cmdRepo.save(command);
-		for (Article article : command.getArticles()) {
-			article.setCommand(command);
-			updateStock(article);
-		}
-		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
-		return command;
-	}
-
-	 */
 
 }

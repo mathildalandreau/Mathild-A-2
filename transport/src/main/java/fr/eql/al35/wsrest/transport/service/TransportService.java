@@ -23,6 +23,7 @@ public class TransportService implements TransportIService {
 	@Autowired
 	private TarifDao tarifDao;
 
+	@Override
 	public Transporteur findById(Integer id) {
 		return transporteurDao.findById(id).get();
 	}
@@ -39,4 +40,8 @@ public class TransportService implements TransportIService {
 		return tarifs;
 	}
 
+	@Override
+	public Tarif getTarifById(Integer id) {
+		return tarifDao.findById(id).get();
+	}
 }

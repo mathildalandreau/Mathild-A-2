@@ -15,5 +15,8 @@ public class Cart {
 	private int articlesQuantity;
 	private Double price;
 	private Set<CommandLine> commandLines;
+	private Double sendingPrice;
+	private String transporteur;
+	private Double poidsColis;
 
 }

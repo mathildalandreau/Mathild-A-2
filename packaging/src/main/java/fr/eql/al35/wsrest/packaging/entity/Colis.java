@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
@@ -23,7 +26,8 @@ public class Colis implements Serializable {
 	private Double initialWeight;
 	private Double finalWeight;
 	
-	@OneToOne(mappedBy = "colis",cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="parcel_id")
 	public Parcel parcel;
 }
 

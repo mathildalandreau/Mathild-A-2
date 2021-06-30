@@ -9,4 +9,5 @@ public interface ColisService {
 
 	public List<Tarif> displayAllTarifs(Double poidsColis);
 	public Colis getPoids(Colis colis);
+	public Tarif getTarif(Integer id);
 }

@@ -17,13 +17,5 @@ public interface CommandIService {
 	List<Command> displayAllCommands();
 	public void saveUser(User user);
 	public Double calculateInitialWeight(Cart cart);
-	
-	//Floriane : pas encore retouchée
-	//Command updateCommand(Command command);
 	Command updateCommand(Command command, Status status);
-
-
-	//Floriane : voir si c'est utile de les refaire ou non
-	//public Command createCommand(Cart cart, Command command);
-	//public Command saveCommand(Command command);
 }

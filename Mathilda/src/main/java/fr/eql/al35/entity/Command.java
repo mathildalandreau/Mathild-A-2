@@ -61,11 +61,11 @@ public class Command implements Serializable {
 	@JoinColumn(name="delivery_address_id")
 	private Address deliveryAddress;
 
-	@ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name="facturation_address_id")
 	private Address facturationAddress;
 	
-	@OneToMany(mappedBy="command", cascade=CascadeType.MERGE)
+	@OneToMany(mappedBy="command", cascade=CascadeType.DETACH)
 	private Set<CommandLine> commandLines;
 	
 	@Override

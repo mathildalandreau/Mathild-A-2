@@ -7,6 +7,10 @@ body {
 	background: #eee
 }
 
+#parentCart{
+	background-color:hotpink;
+}
+
 #cart-end {
 	border-top: 1px solid grey;
 }
