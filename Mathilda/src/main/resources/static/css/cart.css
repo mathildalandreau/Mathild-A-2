@@ -4,26 +4,37 @@
 
 body {
 	font-family: 'Manrope', sans-serif;
-	background: #eee
 }
 
-#parentCart{
-	background-color:hotpink;
+#center {
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
-#cart-end {
-	border-top: 1px solid grey;
+#parentParentCart {
+	display: flex;
+	flex-direction: column;
+}
+
+#enfant1Cart {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#enfant11Cart {
+	display: flex;
+	align-items: center;
+	margin-bottom: 2vh;
+	margin-top: 2vh
 }
 
 #article {
 	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	margin-bottom: 2vh;
 }
 
 #article-info {
-	justify-content: space-between;
-}
-
-#cart-end {
 	justify-content: space-between;
 }
 
@@ -73,7 +84,39 @@ body {
 	font-size: 11px
 }
 
-#lienPanier, #btnChoixTransporteur {
+#divParentChoixTransporteur {
+	_background-color: olive;
+	border: 1px solid hotpink;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	flex-grow: 1;
+}
+
+/* liens en bas */
+#totalBoutonsCart {
+	display: flex;
+	flex-direction: column;
+}
+
+#totalPanier {
+	align-self: flex-end;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#totalPanier>label {
+	padding: 1vh 1vw;
+	margin: 1vh 2vw;
+	font-size: large;
+	font-weight: bold;
+}
+
+#cart-end {
+	justify-content: space-between;
+}
+
+#lienPanier, #btnChoixTransporteur, #lienAchat {
 	text-decoration: none;
 	padding: 1vh 1vw;
 	margin: 1vh 2vw;
@@ -87,19 +130,10 @@ body {
 	font-family: "Gill Sans", sans-serif;
 }
 
-#lienPanier:hover, #btnChoixTransporteur:hover {
+#lienPanier:hover, #btnChoixTransporteur:hover, #lienAchat:hover {
 	text-decoration: none;
 	transition: all 0.3s ease 0s;
 	background: #E28787;
 	color: white;
 	letter-spacing: 1px;
-}
-
-#divParentChoixTransporteur {
-	_background-color: olive;
-	border: 1px solid hotpink;
-	display: flex;
-	flex-direction: column;
-	align-items:stretch;
-	flex-grow: 1;
 }

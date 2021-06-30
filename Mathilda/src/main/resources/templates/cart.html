@@ -8,44 +8,52 @@
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 </head>
 <body>
-
 	<div layout:fragment="content">
-	<!-- OK :  -->
-		<div class="container mt-5 mb-5">
+		<!-- OK :  -->
+		<div id="parentParentCart" class="container mt-5 mb-5">
 			<div id="parentCart" class="d-flex justify-content-center row">
-				<div class="col-md-8">
-					<div class="p-2 d-flex flex-column" style="justify-content:space-beetwen">
+				<div id="enfant1Cart" class="col-md-8">
+					<div id="enfant11Cart" class="p-2 d-flex flex-column">
 						<h4>Panier</h4>
-						<span th:if="${cart.articlesQuantity == 0}">Votre Panier est vide</span>
-						<a id="lienPanier" href="/products/all">Poursuivre mes Achats</a>
+						<span th:if="${cart.articlesQuantity == 0}">Votre Panier
+							est vide</span>
 					</div>
 					<div th:if="${cart.articlesQuantity > 0}" id="article"
-						class="d-flex flex-column p-2 bg-white "
+						class="d-flex flex-column p-2"
 						th:each="commandLine, iterstat : ${commandLines}">
-						<div id="article-info" class="d-flex flex-rox align-items-center p-2 bg-white ">
+						<div id="article-info"
+							class="d-flex flex-rox align-items-center p-2">
 							<div id="article-photo" class="mr-1">
 								<img class="rounded"
 									th:src="@{'/photos/product/' + ${commandLine.product.photos[2].path}}"
 									alt="${commandLine.product.photos[0].description}" width="70">
-							</div>	
-							<div id="commandLine-name" class="d-flex flex-row align-items-center product-details">
-								<span class="font-weight-bold" th:text="${commandLine.product.name}"></span>
 							</div>
-							<div id="commandLine-color" class="d-flex flex-row align-items-center product-details">
-								<span class="font-weight-bold" th:text="${commandLine.color.label}"></span>
+							<div id="commandLine-name"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold"
+									th:text="${commandLine.product.name}"></span>
 							</div>
-							<div id="article-price" class="d-flex flex-row align-items-center product-details">
-								<span class="font-weight-bold">[[${#numbers.formatCurrency((commandLine.product.price)*(commandLine.productQuantity))}]]</span>
+							<div id="commandLine-color"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold"
+									th:text="${commandLine.color.label}"></span>
 							</div>
-							<div id="article-unit-price" class="d-flex flex-row align-items-center product-details">
-								<span class="text-grey">[[${#numbers.formatCurrency(commandLine.product.price)}]]</span>
+							<div id="article-unit-price"
+								class="d-flex flex-row align-items-center product-details">
+								<span>[[${#numbers.formatCurrency(commandLine.product.price)}]]</span>
 							</div>
-							<div id="article-qtte" class="d-flex flex-row align-items-center product-details">
-								<span class="text-grey">Quantité : 
-								<span class="font-weight-bold" th:text="' ' + ${commandLine.productQuantity}"></span>
+							<div id="article-qtte"
+								class="d-flex flex-row align-items-center product-details">
+								<span>Quantité : <span class="font-weight-bold"
+									th:text="' ' + ${commandLine.productQuantity}"></span>
 								</span>
 							</div>
-							
+							<div id="article-price"
+								class="d-flex flex-row align-items-center product-details">
+								<span class="font-weight-bold">[[${#numbers.formatCurrency((commandLine.product.price)*(commandLine.productQuantity))}]]</span>
+							</div>
+
+
 							<!-- 
 							<form class="trash" th:action="@{/cart}" method="post">
 								<input type="hidden" th:value="${iterstat.index}" name="index" />
@@ -54,14 +62,24 @@
 							 -->
 						</div>
 					</div>
-					<div  th:if="${cart.articlesQuantity > 0}" id="cart-end"
-						class="d-flex flex-row align-items-center justify-content-space-beetwen p-2 bg-white">
-						<label>Total du panier : <span>[[${#numbers.formatCurrency(total)}]]</span> </label> 
-						<button class="btn btn-warning btn-block btn-lg ml-2 pay-button"
-							type="button" onclick="window.location.href = '/choixTransporteur';">Proceder
-							au paiment</button>
+					<div id="totalBoutonsCart">
+						<div id="totalPanier">
+							<label>Total du panier : <span>[[${#numbers.formatCurrency(total)}]]</span>
+							</label>
+						</div>
+						<div id="cart-end" th:if="${cart.articlesQuantity > 0}"
+							class="d-flex flex-row align-items-center justify-content-space-beetwen p-2">
+							<a id="lienPanier"
+								class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+								href="/products/all">Poursuivre mes Achats</a>
+							<button id="lienAchat"
+								class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+								type="button"
+								onclick="window.location.href = '/choixTransporteur';">Proceder
+								au paiment</button>
+						</div>
 					</div>
-					
+
 
 				</div>
 			</div>
