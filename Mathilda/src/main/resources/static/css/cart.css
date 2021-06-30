@@ -1,45 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap')
+	;
 
 body {
-    font-family: 'Manrope', sans-serif;
-    background: #eee
+	font-family: 'Manrope', sans-serif;
+	background: #eee
 }
 
-#cart-end{
+#cart-end {
 	border-top: 1px solid grey;
 }
 
-#article{
+#article {
 	border-top: 1px solid grey;
 }
 
 #article-info {
-    justify-content: space-between;
+	justify-content: space-between;
 }
 
-
-#cart-end{
-	 justify-content: space-between;
+#cart-end {
+	justify-content: space-between;
 }
 
-#custom{
-	 justify-content: space-between;
-	 margin-left: 40px;
+#custom {
+	justify-content: space-between;
+	margin-left: 40px;
 }
 
 .size span {
-    font-size: 11px
+	font-size: 11px
 }
 
 .color span {
-    font-size: 11px
+	font-size: 11px
 }
 
 .product-deta {
-    margin-right: 70px
+	margin-right: 70px
 }
-
-
 
 .pay-button {
 	_width: 100px;
@@ -63,17 +62,17 @@ body {
 }
 
 .text-grey {
-    color: #a39f9f
+	color: #a39f9f
 }
 
 .qty i {
-    font-size: 11px
+	font-size: 11px
 }
 
-#lienPanier {
-	text-decoration:none;
-	padding:1vh 1vw;
-	margin:1vh 2vw;
+#lienPanier, #btnChoixTransporteur {
+	text-decoration: none;
+	padding: 1vh 1vw;
+	margin: 1vh 2vw;
 	align-self: flex-start;
 	font-weight: bold;
 	background: #FFE4DB;
@@ -84,10 +83,19 @@ body {
 	font-family: "Gill Sans", sans-serif;
 }
 
-#lienPanier:hover {
-	text-decoration:none;
+#lienPanier:hover, #btnChoixTransporteur:hover {
+	text-decoration: none;
 	transition: all 0.3s ease 0s;
 	background: #E28787;
 	color: white;
 	letter-spacing: 1px;
+}
+
+#divParentChoixTransporteur {
+	_background-color: olive;
+	border: 1px solid hotpink;
+	display: flex;
+	flex-direction: column;
+	align-items:stretch;
+	flex-grow: 1;
 }

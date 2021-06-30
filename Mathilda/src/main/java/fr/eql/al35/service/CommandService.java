@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
+import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.entity.PayMode;
 import fr.eql.al35.entity.Status;
 import fr.eql.al35.entity.User;
@@ -145,6 +146,14 @@ public class CommandService implements CommandIService {
 		return reference.toString();
 	}
 
+	@Override
+	public Double calculateInitialWeight(Cart cart) {
+		Double weight=0d;
+		for (CommandLine commandLine : cart.getCommandLines()) {
+			weight+= commandLine.getProduct().getDimension().getWeight() * commandLine.getProductQuantity();
+		}
+		return weight;
+	}
 
 	@Override
 	public Command updateCommand(Command command, Status status) {
@@ -157,9 +166,9 @@ public class CommandService implements CommandIService {
 		command.setStatus(status);
 		statusRepo.save(command.getStatus());
 		return cmdRepo.save(command);
-		
-		
+
 	}
+
 
 	/*
 	 * Pas encore retouchées :
