@@ -79,6 +79,9 @@ public class CommandService implements CommandIService {
 		command.setUser(sessionUser); //user
 		setAddresses(command); // à implémenter: deliveryAddress and facturationAddress
 		command.setCommandLines(cart.getCommandLines()); //commandLines
+		command.setSendingPrice(cart.getSendingPrice());
+		command.setTransporteur(cart.getTransporteur());
+		command.setFinalWeight(cart.getPoidsColis());
 		cmdRepo.save(command); //enregistrer en BDD
 		return command;
 	}
