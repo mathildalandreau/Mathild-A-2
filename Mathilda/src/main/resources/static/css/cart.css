@@ -84,15 +84,6 @@ body {
 	font-size: 11px
 }
 
-#divParentChoixTransporteur {
-	_background-color: olive;
-	border: 1px solid hotpink;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	flex-grow: 1;
-}
-
 /* liens en bas */
 #totalBoutonsCart {
 	display: flex;
@@ -116,7 +107,7 @@ body {
 	justify-content: space-between;
 }
 
-#lienPanier, #btnChoixTransporteur, #lienAchat {
+#lienPanier, #lienAchat {
 	text-decoration: none;
 	padding: 1vh 1vw;
 	margin: 1vh 2vw;
@@ -130,7 +121,7 @@ body {
 	font-family: "Gill Sans", sans-serif;
 }
 
-#lienPanier:hover, #btnChoixTransporteur:hover, #lienAchat:hover {
+#lienPanier:hover, #lienAchat:hover {
 	text-decoration: none;
 	transition: all 0.3s ease 0s;
 	background: #E28787;
