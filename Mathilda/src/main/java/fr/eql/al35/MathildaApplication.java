@@ -23,6 +23,7 @@ public class MathildaApplication {
 		System.out.println("Coucou .. ça va la vie ? ");
 	}
 	
+	
 
 	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini0
 	@EventListener({ApplicationReadyEvent.class})
