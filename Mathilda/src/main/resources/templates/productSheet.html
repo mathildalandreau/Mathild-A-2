@@ -52,7 +52,8 @@
 							<ul class="preview-thumbnail nav nav-tabs">
 								<li th:each="photo, iterstat : ${product.photos}"
 									th:class="${iterstat.index}== 0  ?
-						   'active'"><a
+						   'active'">
+						   <a
 									th:attr="data-target='#pic-'+(${iterstat.index}+1)"
 									data-toggle="tab"> <img
 										th:src="@{'/photos/product/' + ${photo.path}}"

@@ -82,9 +82,7 @@ public class PaymentController {
 	@PostMapping("/goToPayment")
 	public String postMappingChoixTransporteur(Model model, HttpSession session,
 			@RequestParam("idTarif") Integer idTarif) {
-		//a resoudre : 
 		System.out.println("idTarif : " + idTarif);
-
 		//a continuer en ajoutant le reste
 		return "redirect:payment";
 	}

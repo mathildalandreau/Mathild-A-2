@@ -11,23 +11,14 @@
 	<div layout:fragment="content">
 		<div id="divParentChoixTransporteur">
 			<a id="lienPanier" href="/products/all">Poursuivre mes Achats</a>
-			
-			<form th:action="@{/goToPayment}" method="post" th:object="${tarif}">
-				<div th:each="tarif2 : ${tarifs}" >
+
+			<form th:each="tarif2 : ${tarifs}" th:action="@{/goToPayment}" method="post" th:object="${tarif}">
 					<div th:text="'Prix : ' + ${tarif2.price}"></div>
 					<div th:text="'transporteur : ' + ${tarif2.transporteur.name}"></div>
-					<div th:text="'id : ' + ${tarif2.id}"></div>
-					<input type="hidden" th:value="${tarif2.id}" name="idTarif"/>
-					<input id="btnChoixTransporteur"  type="submit" value="choisir ce transporteur"/>
-				</div>
-			
-			
+					<input type="text" th:name="idTarif" th:value="${tarif2.id}" />
+					<input id="btnChoixTransporteur" type="submit" value="choisir ce transporteur" />
 			</form>
-			
-			
-			
-
-<!-- 
+	<!-- 
 			<form th:action="@{/goToPayment}" th:object="${tarif}" method="post">
 				<div id="tarif" class="d-flex col-6">
 				<span> Tarifs - Transporteur </span>
