@@ -1,5 +1,5 @@
 .container {
-    margin-top: 50px;
+    _margin-top: 50px;
     display : flex;
     flex-wrap : wrap;
     flex-direction : row-reverse;
@@ -9,6 +9,19 @@
 	flex-basis : 20%;
 	
 }
+
+#nav-produit{
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+ #center {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+#list-product-type{
+	background:none!important;
+}
+
 h3.h3 {
     text-align: center;
     margin: 1em;
