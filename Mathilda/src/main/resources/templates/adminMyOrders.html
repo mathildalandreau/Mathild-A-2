@@ -34,7 +34,7 @@
 								aria-controls="TooooOTO" id="boutonHeader">
 								<b>Commande du : </b>
 								<span th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></span>
-								<b>Status : </b>
+								<b>Statut : </b>
 								<span class="orderStatus"
 										th:if="${command.creationDate != null and command.shippingDate ==null}"> <b class="cmdEnPrep">Commande en cours de pr&eacute;paration</b>
 									</span> <span class="orderStatus"
