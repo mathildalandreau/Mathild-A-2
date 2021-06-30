@@ -96,23 +96,4 @@ public class PaymentController {
 		return "redirect:home";
 	}
 
-	//temporaire pour tester, à enlever ensuite
-	@GetMapping("/tarifs")
-	public String displayTarifs(Model model) {
-		try {
-			Colis colis = new Colis();
-			colis.setInitialWeight(0.6); //poids de la commande en dur en dur
-			colis = colisServiceDelegate.getPoids(colis); //ICI OK ON A BIEN RECUP LE POIDS FINAL
-			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(colis.getFinalWeight()); 
-			model.addAttribute("colis", colis);
-			System.out.println("Mon colis:" + colis);
-			model.addAttribute("tarifs", tarifs);
-			System.out.println("taille liste tarifs : " + tarifs.size());
-			System.out.println("un tarif " + tarifs.get(0).toString()); //ICI OK ON A BIEN RECUP LE TARIF
-		} catch (Exception e) {
-			System.out.println("WS transport HS ..?");
-		}
-		return "tarifs";
-	}
-
 }

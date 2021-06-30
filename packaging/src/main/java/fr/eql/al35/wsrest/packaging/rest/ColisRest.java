@@ -40,7 +40,7 @@ public class ColisRest {
 			response.setMessage("Poids incorrect");
 			return response;	
 		} else 
-		BeanUtils.copyProperties(colisService.getFinalWeight(colis), response);
+			BeanUtils.copyProperties(colisService.getFinalWeight(colis), response);
 		response.setMessage("OK");
 		response.setSize(colis.getParcel().getSize()); 
 		return response;

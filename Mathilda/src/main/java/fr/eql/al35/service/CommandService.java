@@ -172,39 +172,4 @@ public class CommandService implements CommandIService {
 
 	}
 
-
-	/*
-	 * Pas encore retouchées :
-	 */
-
-	/*
-	 * 	@Override
-	public Command updateCommand(Command command) {
-		addressRepo.save(command.getDeliveryAddress());
-		addressRepo.save(command.getFacturationAddress());
-		cityRepo.save(command.getDeliveryAddress().getCity());
-		cityRepo.save(command.getFacturationAddress().getCity());
-		payModeRepo.save(command.getPayMode());
-		vatRepo.save(command.getVat());
-		statusRepo.save(command.getStatus());
-		return cmdRepo.save(command);
-	}
-	 */
-
-
-	/*
-	 * 	@Override
-	public Command saveCommand(Command command) {
-		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
-		cmdRepo.save(command);
-		for (Article article : command.getArticles()) {
-			article.setCommand(command);
-			updateStock(article);
-		}
-		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
-		return command;
-	}
-
-	 */
-
 }
