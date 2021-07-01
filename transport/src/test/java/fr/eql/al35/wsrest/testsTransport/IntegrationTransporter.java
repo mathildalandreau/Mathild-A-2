@@ -1,9 +1,5 @@
 package fr.eql.al35.wsrest.testsTransport;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.beans.BeanProperty;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +25,7 @@ class IntegrationTransporter {
 
 	private static RestTemplate restTemplate;
 	private String  baseUrlWSTarfis = "http://localhost:8088/transport-rest/allTarifs/";	
-	private URI url = URI.create(baseUrlWSTarfis);
+	//private URI url = URI.create(baseUrlWSTarfis);
 
 	@BeforeAll
 	public static void Init() {

@@ -1,16 +1,13 @@
 package fr.eql.al35.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import fr.eql.al35.iservice.ProductIService;
 
 @Controller
 public class CustomController {
 
-	@Autowired
-	private ProductIService productService;
-	private Integer quantity;
+	//@Autowired
+	//private ProductIService productService;
+	//private Integer quantity;
 
 	/* ancienne méthode Favori(te)
 	@PostMapping("/generateCustom")

@@ -1,20 +1,14 @@
 package fr.eql.al35.service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.eql.al35.entity.Photo;
 import fr.eql.al35.entity.Product;
 import fr.eql.al35.entity.ProductType;
 import fr.eql.al35.iservice.ProductIService;
@@ -43,7 +37,7 @@ public class ProductService implements ProductIService {
 		return (List<Product>)productRepository.listAvailableProducts();
 	}
 
-	
+
 	//Méthode vérifiée par Mathilda
 	@Override
 	public Product displayProductById(int id) {
@@ -82,7 +76,7 @@ public class ProductService implements ProductIService {
 			product.get().setRefDeletionDate(LocalDateTime.now());
 		}
 	}
-	
+
 	@Override
 	public void setUndeleteProduct(Integer id) {
 		Optional<Product> product = productRepository.findById(id);

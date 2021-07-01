@@ -3,7 +3,6 @@ package fr.eql.al35.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class AdminController {
 
 	@Autowired
 	private PhotoIService photoService;
-	
+
 	@Autowired
 	private StatusIRepository statusRepository;
 
@@ -165,17 +164,17 @@ public class AdminController {
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 		return "adminCommand";
 	}
-*/
+	 */
 
 	@GetMapping("/admin/products/{id}")
 	public String displayProduct(@PathVariable Integer id, Model model) {
-	
+
 		model.addAttribute("product", productService.displayProductById(id));
 		model.addAttribute("productTypes", productService.displayAllCategories());
 		model.addAttribute("index", 0);
 		return "adminProductInfo";
 	}
-	
+
 
 	@GetMapping("/admin/products/delete/{id}")
 	public String deleteProduct(@PathVariable Integer id, Model model) {
@@ -183,7 +182,7 @@ public class AdminController {
 		productService.setDeleteProduct(id);
 		return "adminProducts";
 	}
-	
+
 	@GetMapping("/admin/products/undelete/{id}")
 	public String undeleteProduct(@PathVariable Integer id, Model model) {
 		model.addAttribute("products", productService.displayAllProducts());
@@ -205,7 +204,7 @@ public class AdminController {
 		model.addAttribute("products", productService.displayAllProducts());
 		return "adminProducts";
 	}
-	
+
 	@GetMapping("/adminMyOrders")
 	public String userCommands(Model model) {
 		List<Command> commands = commandService.displayAllCommands();
@@ -214,12 +213,12 @@ public class AdminController {
 		model.addAttribute("commands", commands);
 		return "adminMyOrders";
 	}
-	
+
 
 	@PostMapping("/upDateStatus")
 	public String updateCommand(Model model, @ModelAttribute("idCommand") Integer id, @ModelAttribute("status") Status status) {
-	
-		
+
+
 		Command command = commandService.displaybyId(id);
 		commandService.updateCommand(command, status);
 		model.addAttribute("commands", commandService.displayAllCommands());
