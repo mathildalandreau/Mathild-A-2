@@ -30,7 +30,7 @@ public class Address implements Serializable {
 	private String name;
 	private String street;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 	

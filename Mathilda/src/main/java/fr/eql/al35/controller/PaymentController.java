@@ -63,7 +63,6 @@ public class PaymentController {
 			@RequestParam("idTarif") Integer idTarif,
 			@ModelAttribute("tarifs") ArrayList<Tarif> tarifs) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
-		System.out.println(" ds postMapping choixTransporteur : idTarif : " + idTarif);
 		Tarif tarif = colisServiceDelegate.getTarif(idTarif);
 		sessionCart.setSendingPrice(tarif.getPrice());
 		sessionCart.setTransporteur(tarif.getTransporteur().getName());
@@ -83,8 +82,13 @@ public class PaymentController {
 			@ModelAttribute("command") Command command) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
-
-		command = cmdService.createCommand(sessionCart, sessionUser); 
+		try {
+			command.getDeliveryAddress().setUser(sessionUser);
+			command.getFacturationAddress().setUser(sessionUser);
+		} catch (Exception e) {
+			System.out.println("paymentController, adresse non remplie");
+		}
+		command = cmdService.createCommand(command, sessionCart, sessionUser); 
 		cmdService.saveUser(sessionUser); 
 
 		try {

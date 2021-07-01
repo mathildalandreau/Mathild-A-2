@@ -1,84 +1,98 @@
-* {
+@import
+	url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap')
+	;
 
-	font-family: "Gill Sans", sans-serif;
+body {
+	font-family: 'Manrope', sans-serif;
 }
 
-.row {
-	_background-color:olive;
-	padding:1vh;
-	display:flex;
-	flex-direction:column;
-	align-items:stretch;
-	flex-grow:1;
-
+#center {
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
-.card-header, .card-body{
-	_background-color:orange;
-	padding:1vh;
-	display:flex;
-	flex-direction:column;
+.row, .accordion, .card {
+	background: none;
+	padding: 1vh;
+	display: flex;
+	flex-direction: column;
 	align-items: stretch;
+	flex-grow: 1;
 }
 
-#boutonHeader{
-	text-decoration:none;
-	color : #00010D;
+.card-header, .card-body {
+	background: none;
+	_padding: 1vh;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	border: none;
 }
 
-#boutonHeader:hover, #boutonHeader:focus {
-	text-decoration : none;
+.card {
+	margin: 0vh 1vw;
+	border-right: none;
+	border-left: none;
+	border-top: 1px solid grey;
+	border-bottom: 1px solid grey;
+	border-radius: inherit;
+}
+
+#boutonHeader {
+	text-decoration: none;
+	color: #AD1E1E;
+}
+
+#boutonHeader:hover, #boutonHeader:focus, #boutonHeader:active {
+	text-decoration: none;
 }
 
 #dateCommande {
-	_background-color:#E28787;
-	display:flex;
-	flex-direction:column;
-	padding:1vh;
-	margin:1vh 2vw;
+	_background-color: #E28787;
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	margin: 1vh 2vw;
 }
 
 #reference {
-	_background-color:red;
-	padding:1vh;
-	margin:1vh 2vw;
-	display:flex;
-	flex-direction:column;
-	align-items:stretch;
+	_background-color: red;
+	padding: 1vh;
+	margin: 1vh 2vw;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
 
 #tableRef {
 	border-color: #E28787;
 	border-style: none;
-	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px
+		2px;
 }
 
 #tableRef th {
-	_background-color:white;
-	padding:1vh 1vw;
+	_background-color: white;
+	padding: 1vh 1vw;
 }
 
 #tableRef td {
-	_background-color:yellow;
-	padding:1vh 1vw;
-	border-top:2px solid #E28787;
+	_background-color: yellow;
+	padding: 1vh 1vw;
+	border-top: 2px solid #E28787;
 }
 
-.tdQuantity, .tdName, .tdColor, .tdPrice{
+.tdQuantity, .tdName, .tdColor, .tdPrice {
 	align-content: center;
-
 }
 
-.spanQuantity, .spanName, .spanColor, .spanPrice{
-
+.spanQuantity, .spanName, .spanColor, .spanPrice {
 	align-content: center;
-
 }
 
 #lienDetail {
-	text-decoration:none;
-	padding:1vh 1vw;
-	margin:1vh 2vw;
+	text-decoration: none;
+	padding: 1vh 1vw;
+	margin: 1vh 2vw;
 	align-self: flex-end;
 	font-weight: bold;
 	background: #E28787;
@@ -90,13 +104,12 @@
 }
 
 #lienDetail:hover {
-	text-decoration:none;
+	text-decoration: none;
 	transition: all 0.3s ease 0s;
 	background: #E28787;
 	color: black;
 	letter-spacing: 1px;
 }
-
 
 .cmdEnPrep {
 	color: #B4CBD9;
@@ -111,32 +124,28 @@
 }
 
 .cmdCoursDeRetour {
-	color:purple;
+	color: purple;
 }
 
 .cmdRetournee {
-	color:#0080c0;
+	color: #0080c0;
 }
 
-#card-button-19,
-#card-button-20,
-#card-button-21,
-#card-button-22,
-#card-button-23{
-	padding : 0.75vh;
-	background-color : #E28787;
-	border : none;
-	font-size: large;
-	margin : 0.5vh;
 
+#card-button-19, #card-button-20, #card-button-21, #card-button-22 {
+    padding: 0.75vh;
+    _background-color: #E28787;
+    border: none;
+    font-size: large;
+    margin: 0.5vh;
 }
 
-#title2{
+#title2 {
 	justify-content: center;
 	text-align: center;
-	color : white;
+	color: white;
 }
 
-.btn .btn-link{
-		color : #00010D;
+.btn .btn-link {
+	color: #00010D;
 }

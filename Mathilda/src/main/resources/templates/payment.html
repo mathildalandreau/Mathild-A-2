@@ -17,15 +17,15 @@
 	 <div layout:fragment="content">
 			<!-- MultiStep Form -->
 			<div class="container-fluid" id="grad1">
-				<div class="row justify-content-center mt-0">
-					<div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+				<div id="grad11" class="row justify-content-center mt-0">
+					<div id ="grad111" class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
 						<div id="parent" class="card px-0 pt-4 pb-0 mt-3 mb-3">
 							<h2>
 								<strong>Bienvenue sur l'interface de paiement</strong>
 							</h2>
 							<p>Tous les champs sont obligatoires</p>
 							<div class="row">
-								<div class="col-md-12 mx-0">
+								<div id="rowChild1" class="col-md-12 mx-0">
 									<form id="msform" th:action="@{/newCommand}" th:object=${command} method="post">
 										<!-- progressbar -->
 										<ul id="progressbar">
@@ -36,17 +36,6 @@
 										</ul> <!-- fieldsets -->
 										<fieldset>
 											<div class="form-card">
-												<h2 class="fs-title">Adresse de Facturation</h2>
-												<label> Nom </label>
-												<input class="form-control" type="text" th:field="*{facturationAddress.name}"/>
-												<label> N° et rue </label>
-												<input class="form-control" type="text" th:field="*{facturationAddress.street}"/>
-												<label> Code Postal </label>
-												<input class="form-control" type="text" th:field="*{facturationAddress.city.zipCode}"/>
-												<label> Ville </label>
-												<input class="form-control" type="text" th:field="*{facturationAddress.city.name}"/>
-											</div>
-											<div class="form-card">
 												<h2 class="fs-title">Adresse de Livraison</h2>
 												<label> Nom </label>
 												<input class="form-control" type="text" th:field="*{deliveryAddress.name}"/>
@@ -56,6 +45,17 @@
 												<input class="form-control" type="text" th:field="*{deliveryAddress.city.zipCode}"/>
 												<label> Ville </label>
 												<input class="form-control" type="text" th:field="*{deliveryAddress.city.name}"/>
+											</div>
+											<div class="form-card" th:if="${aREMPLIR}">
+												<h2 class="fs-title">Adresse de Facturation</h2>
+												<label> Nom </label>
+												<input class="form-control" type="text" th:field="*{facturationAddress.name}"/>
+												<label> N° et rue </label>
+												<input class="form-control" type="text" th:field="*{facturationAddress.street}"/>
+												<label> Code Postal </label>
+												<input class="form-control" type="text" th:field="*{facturationAddress.city.zipCode}"/>
+												<label> Ville </label>
+												<input class="form-control" type="text" th:field="*{facturationAddress.city.name}"/>
 											</div>
 											<input type="button" name="previous" class="previous action-button-previous" value="précédent" />
 											<input type="button" name="next" class="next action-button" value="suivant" />
