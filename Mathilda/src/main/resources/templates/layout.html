@@ -25,7 +25,7 @@
 					   			<img width="32px" id="switch-logo" src="/icons/arrow-repeat.svg" alt="switch icon">
 					   		</a>
 							<b>
-								<a id="welcome-link" class="nav-link active" aria-current="page" th:text="'Bonjour ' + ${#session.getAttribute('sessionUser').surname}"></a>
+								<a id="welcome-link" class="nav-link active" aria-current="page" th:text="'Bonjour ' + ${#session.getAttribute('sessionUser').surname} + ' ' + ${#session.getAttribute('sessionUser').name}"></a>
 							</b>
 					   </li>
 					   <li class="nav-item d-flex" th:if="${#session.getAttribute('sessionUser').userType.id == 2}">

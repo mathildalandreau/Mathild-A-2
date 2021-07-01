@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Command implements Serializable {
 
@@ -166,6 +166,168 @@ public class Command implements Serializable {
 			return false;
 		return true;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public LocalDateTime getShippingDate() {
+		return shippingDate;
+	}
+
+	public void setShippingDate(LocalDateTime shippingDate) {
+		this.shippingDate = shippingDate;
+	}
+
+	public LocalDateTime getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(LocalDateTime deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public LocalDateTime getCancelDate() {
+		return cancelDate;
+	}
+
+	public void setCancelDate(LocalDateTime cancelDate) {
+		this.cancelDate = cancelDate;
+	}
+
+	public LocalDateTime getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(LocalDateTime returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public LocalDateTime getDeliveryReturnDate() {
+		return deliveryReturnDate;
+	}
+
+	public void setDeliveryReturnDate(LocalDateTime deliveryReturnDate) {
+		this.deliveryReturnDate = deliveryReturnDate;
+	}
+
+	public Double getTaxInPrice() {
+		return taxInPrice;
+	}
+
+	public void setTaxInPrice(Double taxInPrice) {
+		this.taxInPrice = taxInPrice;
+	}
+
+	public Double getTaxOutPrice() {
+		return taxOutPrice;
+	}
+
+	public void setTaxOutPrice(Double taxOutPrice) {
+		this.taxOutPrice = taxOutPrice;
+	}
+
+	public Double getSendingPrice() {
+		return sendingPrice;
+	}
+
+	public void setSendingPrice(Double sendingPrice) {
+		this.sendingPrice = sendingPrice;
+	}
+
+	public String getTransporteur() {
+		return transporteur;
+	}
+
+	public void setTransporteur(String transporteur) {
+		this.transporteur = transporteur;
+	}
+
+	public Double getFinalWeight() {
+		return (Math.round(finalWeight*100d) / 100d);
+	}
+
+	public void setFinalWeight(Double finalWeight) {
+		this.finalWeight = finalWeight;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public PayMode getPayMode() {
+		return payMode;
+	}
+
+	public void setPayMode(PayMode payMode) {
+		this.payMode = payMode;
+	}
+
+	public Vat getVat() {
+		return vat;
+	}
+
+	public void setVat(Vat vat) {
+		this.vat = vat;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	public Address getFacturationAddress() {
+		return facturationAddress;
+	}
+
+	public void setFacturationAddress(Address facturationAddress) {
+		this.facturationAddress = facturationAddress;
+	}
+
+	public Set<CommandLine> getCommandLines() {
+		return commandLines;
+	}
+
+	public void setCommandLines(Set<CommandLine> commandLines) {
+		this.commandLines = commandLines;
+	}
+	
+	
 
 
 
