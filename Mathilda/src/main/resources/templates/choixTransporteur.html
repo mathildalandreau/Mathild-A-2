@@ -5,36 +5,42 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Choix Transporteur</title>
-<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/choixTransporteur.css">
 </head>
 <body>
 	<div layout:fragment="content">
+				<div id="h4Transporteur">
+				<h4>Choisissez un Transporteur :</h4>
+			</div>
 		<div id="divParentChoixTransporteur">
-			<a id="lienPanier" href="/products/all">Poursuivre mes Achats</a>
-
-			<form th:each="tarif2 : ${tarifs}" th:action="@{/goToPayment}" method="post" th:object="${tarif}">
-					<div th:text="'Prix : ' + ${tarif2.price}"></div>
-					<div th:text="'transporteur : ' + ${tarif2.transporteur.name}"></div>
-					<input type="text" th:name="idTarif" th:value="${tarif2.id}" />
-					<input id="btnChoixTransporteur" type="submit" value="choisir ce transporteur" />
-			</form>
-	<!-- 
-			<form th:action="@{/goToPayment}" th:object="${tarif}" method="post">
-				<div id="tarif" class="d-flex col-6">
-				<span> Tarifs - Transporteur </span>
-				<select th:field="${tarif}" class="form-control form-control-sm">
-					<option th:each="tarif2 : ${tarifs}" 
-							th:value="${tarif2.id}"
-							th:text="'Prix : ' + ${tarif2.price} + ' - transporteur : ' + ${tarif2.transporteur.name}">
-					</option>
-				</select>
+			<form class="formChoixTransporteur" th:each="tarif2 : ${tarifs}" th:action="@{/goToPayment}"
+				method="post">
+				<div class="eachLeftPanel">
+					<div class="divEachTransporteur">
+						<label>Transporteur :&nbsp;</label>
+						<div th:text="' ' + ${tarif2.transporteur.name}"></div>
+					</div>
+					<div class="divEachTransporteur">
+						<label> D&eacute;lai de livraison :&nbsp;</label>
+						<div th:text="' ' + ${tarif2.transporteur.deliveryRange} + ' '"></div>
+						<label>&nbsp;jours ouvr&eacute;s </label>
+					</div>
+					<div class="divEachTransporteur">
+						<label>Prix :&nbsp;</label>
+						<div th:text="' ' +${tarif2.price}"></div>
+						<label>&nbsp;&euro;</label>
+					</div>
 				</div>
-				<input id="btnChoixTransporteur" type="submit" value="Proceder au payment" class="btn btn-primary" />
+				<div class="eachRightPanel">
+					<input type="hidden" th:name="idTarif" th:value="${tarif2.id}" />
+					<input id="btnChoixTransporteur" type="submit"
+						value="choisir ce transporteur" />
+				</div>
 			</form>
- -->
+			<div id="parentLienPanier">
+				<a id="lienAchat" href="/products/all">Poursuivre mes Achats</a>
+			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>

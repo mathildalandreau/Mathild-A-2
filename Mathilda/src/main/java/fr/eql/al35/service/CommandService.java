@@ -69,17 +69,21 @@ public class CommandService implements CommandIService {
 	//méthode publiques :
 
 	@Override
-	public Command createCommand(Cart cart, User sessionUser) {
-		Command command = new Command();
-		//reference
-		command.setReference(writeReference(sessionUser));
+	public Command createCommand(Command command, Cart cart, User sessionUser) {
+		command.setReference(writeReference(sessionUser)); //reference
 		setCreationDateAndStatus(command); //creationDate et status
 		command.setTaxOutPrice((double) (Math.round(cart.getPrice()*100) / 100)); //taxOutPrice
 		setVatAndTaxInPrice(command); //vat and taxPrice
 		command.setUser(sessionUser); //user
-		setAddresses(command); // à implémenter: deliveryAddress and facturationAddress
 		command.setCommandLines(cart.getCommandLines()); //commandLines
+		command.setSendingPrice(cart.getSendingPrice());
+		command.setTransporteur(cart.getTransporteur());
+		command.setFinalWeight(cart.getPoidsColis());
 		cmdRepo.save(command); //enregistrer en BDD
+		for (CommandLine cmdLine : cart.getCommandLines()) {
+			cmdLine.setCommand(command);
+			cmdLineRepo.save(cmdLine);
+		}
 		return command;
 	}
 
@@ -122,11 +126,6 @@ public class CommandService implements CommandIService {
 		command.setStatus(status.isPresent() ? status.get() : null);
 	}
 
-	private void setAddresses(Command command) {
-		//a implémenter 
-	}
-
-
 	private void setVatAndTaxInPrice(Command command) {
 		Optional<PayMode> paymode = payModeRepo.findById(1);
 		command.setPayMode(paymode.isPresent() ? paymode.get() : null);
@@ -157,51 +156,18 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command updateCommand(Command command, Status status) {
-		addressRepo.save(command.getDeliveryAddress());
+		/*addressRepo.save(command.getDeliveryAddress());
 		addressRepo.save(command.getFacturationAddress());
 		cityRepo.save(command.getDeliveryAddress().getCity());
 		cityRepo.save(command.getFacturationAddress().getCity());
 		payModeRepo.save(command.getPayMode());
-		vatRepo.save(command.getVat());
+		vatRepo.save(command.getVat());*/
 		command.setStatus(status);
-		statusRepo.save(command.getStatus());
+		//mettre un switch case sur le status avec mise à jour de la date 
+		
+		//statusRepo.save(command.getStatus());
 		return cmdRepo.save(command);
 
 	}
-
-
-	/*
-	 * Pas encore retouchées :
-	 */
-
-	/*
-	 * 	@Override
-	public Command updateCommand(Command command) {
-		addressRepo.save(command.getDeliveryAddress());
-		addressRepo.save(command.getFacturationAddress());
-		cityRepo.save(command.getDeliveryAddress().getCity());
-		cityRepo.save(command.getFacturationAddress().getCity());
-		payModeRepo.save(command.getPayMode());
-		vatRepo.save(command.getVat());
-		statusRepo.save(command.getStatus());
-		return cmdRepo.save(command);
-	}
-	 */
-
-
-	/*
-	 * 	@Override
-	public Command saveCommand(Command command) {
-		articleRepo.saveAll(command.getArticles());	//créer les articles en BDD
-		cmdRepo.save(command);
-		for (Article article : command.getArticles()) {
-			article.setCommand(command);
-			updateStock(article);
-		}
-		articleRepo.saveAll(command.getArticles()); //update la cmd ds les articles		
-		return command;
-	}
-
-	 */
 
 }

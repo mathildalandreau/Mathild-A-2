@@ -3,44 +3,75 @@
 	padding: 0;
 	font-family: "Gill Sans", sans-serif;
 	_color: #00010D;
-	_color : #F2F2F2;
-	_color : #B4CBD9;
-	_color : #254B59;
-	_color : #366273;
+	_color: #F2F2F2;
+	_color: #B4CBD9;
+	_color: #254B59;
+	_color: #366273;
+}
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap')
+	;
+
+body {
+	font-family: 'Manrope', sans-serif;
+}
+
+#center {
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
 html {
 	height: 100%
 }
 
-#grad1 {
-	background-color: #F2F2F2;
-}
-
-#msform {
+#msfo
+rm {
 	text-align: center;
 	position: relative;
-	margin-top: 20px
+	_margin-top: 20px
+}
+
+#grad1 {
+	_background-color: #F2F2F2;
+}
+
+#grad111, #grad11 {
+	
 }
 
 #parent {
 	border-radius: 0rem;
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px
 		2px;
-	background-color: #F2F2F2;
+	background: none;
+	flex-grow: 1;
 	color: #00010D;
-	_color : #F2F2F2;
-	_color : #B4CBD9;
-	_color : #254B59;
-	_color : #366273;
+	_color: #F2F2F2;
+	_color: #B4CBD9;
+	_color: #254B59;
+	_color: #366273;
+}
+
+.row {
+	_display: flex;
+	_flex-direction: column;
+	_justify-content: center;
+	_align-items: center;
+}
+
+#rowChild1 {
+	_background-color: teal;
 }
 
 #msform fieldset .form-card {
-	padding: 20px 40px 30px 40px;
+	_padding: 20px 40px 30px 40px;
 	box-sizing: border-box;
 	width: 94%;
-	margin: 0 3% 20px 3%;
+	margin-right: 2vw;
+	margin-left: 2vw; _margin : 0 3% 20px 3%;
 	position: relative;
+	_margin: 0 3% 20px 3%;
 }
 
 #msform fieldset {
@@ -83,49 +114,50 @@ html {
 	box-shadow: none !important;
 	border: none;
 	font-weight: bold;
-	border-bottom: 2px solid skyblue;
+	border-bottom: 2px solid rgb(64, 0, 0) !important;
 	outline-width: 0
 }
 
 #msform .action-button {
 	width: 150px;
 	font-weight: bold;
-	background: #254B59;
-	color: white;
+	background: #FFE4DB; color : rgb( 64, 0, 0);
 	border: 0 none;
 	border-radius: 0px;
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
 	font-family: "Gill Sans", sans-serif;
+	color: rgb(64, 0, 0);
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
 	_box-shadow: 0 0 0 2px white, 0 0 0 3px skyblue;
 	transition: all 0.3s ease 0s;
-	background: #B4CBD9;
-	color: black;
+	background: #E28787; color : white;
 	letter-spacing: 2px;
+	color: white;
 }
 
 #msform .action-button-previous {
 	width: 150px;
-	background: #B4CBD9;
 	font-weight: bold;
-	color: #254B59;
+	background: #E28787; color : white;
 	border: 0 none;
 	border-radius: 0px;
 	cursor: pointer;
 	padding: 10px 5px;
 	margin: 10px 5px;
 	font-family: "Gill Sans", sans-serif;
+	color: white;
 }
 
-#msform .action-button-previous:hover, #msform .action-button-previous:focus {
+#msform .action-button-previous:hover, #msform .action-button-previous:focus
+	{
 	transition: all 0.3s ease 0s;
-	background: #B4CBD9;
-	color: black;
+	background: #FFE4DB; color : rgb( 64, 0, 0);
 	letter-spacing: 2px;
+	color: rgb(64, 0, 0);
 }
 
 select.list-dt {
@@ -137,7 +169,7 @@ select.list-dt {
 }
 
 select.list-dt:focus {
-	border-bottom: 2px solid skyblue
+	border-bottom: 2px solid skyblue;
 }
 
 .card {
@@ -149,7 +181,7 @@ select.list-dt:focus {
 
 .fs-title {
 	font-size: 25px;
-	color: #2C3E50;
+	color: rgb(64, 0, 0);
 	margin-bottom: 10px;
 	font-weight: bold;
 	text-align: left
@@ -158,11 +190,11 @@ select.list-dt:focus {
 #progressbar {
 	margin-bottom: 30px;
 	overflow: hidden;
-	color : #B4CBD9;
+	color: #E28787;
 }
 
 #progressbar .active {
-	color :#366273;
+	color: rgb(64, 0, 0);
 }
 
 #progressbar li {
@@ -201,7 +233,7 @@ select.list-dt:focus {
 	display: block;
 	font-size: 18px;
 	color: #ffffff;
-	background-color : #B4CBD9;
+	background-color: #E28787;;
 	border-radius: 50%;
 	margin: 0 auto 10px auto;
 	padding: 2px
@@ -211,7 +243,7 @@ select.list-dt:focus {
 	content: '';
 	width: 100%;
 	height: 2px;
-	background : #B4CBD9;
+	background: #E28787;
 	position: absolute;
 	left: 0;
 	top: 25px;
@@ -219,7 +251,7 @@ select.list-dt:focus {
 }
 
 #progressbar li.active:before, #progressbar li.active:after {
-	background: #366273;
+	background: rgb(64, 0, 0);
 }
 
 .radio-group {
@@ -232,7 +264,7 @@ select.list-dt:focus {
 	width: 204;
 	height: 104;
 	border-radius: 0;
-	background : #B4CBD9;
+	background: #E28787;
 	box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
 	cursor: pointer;

@@ -51,4 +51,10 @@ public class ColisServiceDelegate implements ColisService {
 		colis = restTemplate.postForObject(url, colis, Colis.class);	
 		return colis; 
 	}
+
+	@Override
+	public Tarif getTarif(Integer id) {
+		String url = baseUrlWsTransport + "/tarif/" + id;
+		return restTemplate.getForObject(url, Tarif.class);
+	}
 }

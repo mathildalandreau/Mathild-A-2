@@ -1,5 +1,6 @@
 package fr.eql.al35.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,25 +39,6 @@ public class PaymentController {
 	@Autowired
 	ColisService colisServiceDelegate;
 
-	//temporaire pour tester, à enlever ensuite
-	@GetMapping("/tarifs")
-	public String displayTarifs(Model model) {
-		try {
-			Colis colis = new Colis();
-			colis.setInitialWeight(0.6); //poids de la commande en dur en dur
-			colis = colisServiceDelegate.getPoids(colis); //ICI OK ON A BIEN RECUP LE POIDS FINAL
-			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(colis.getFinalWeight()); 
-			model.addAttribute("colis", colis);
-			System.out.println("Mon colis:" + colis);
-			model.addAttribute("tarifs", tarifs);
-			System.out.println("taille liste tarifs : " + tarifs.size());
-			System.out.println("un tarif " + tarifs.get(0).toString()); //ICI OK ON A BIEN RECUP LE TARIF
-		} catch (Exception e) {
-			System.out.println("WS transport HS ..?");
-		}
-		return "tarifs";
-	}
-
 
 	@GetMapping("/choixTransporteur")
 	public String displayTransporteur(Model model, HttpSession session) {
@@ -65,14 +47,11 @@ public class PaymentController {
 		Double initialWeight = cmdService.calculateInitialWeight(sessionCart);
 		colis.setInitialWeight(initialWeight);
 		colis = colisServiceDelegate.getPoids(colis);
-		model.addAttribute("colis", colis);// peut etre pas necessaire
-		model.addAttribute("tarif", new Tarif());
+		sessionCart.setPoidsColis(colis.getFinalWeight());
+		// peut etre pas necessaire model.addAttribute("colis", colis);
 		try {
-			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(25.6);  //////A CHANGER ICI :colis.getFinalWeight() ///////////
+			List<Tarif> tarifs = colisServiceDelegate.displayAllTarifs(colis.getFinalWeight()); 
 			model.addAttribute("tarifs", tarifs);
-			for (Tarif tarif : tarifs) {
-				System.out.println(tarif.toString());
-			}
 		} catch (Exception e) {
 			System.out.println("WS transport HS ..?");
 		}
@@ -81,9 +60,12 @@ public class PaymentController {
 
 	@PostMapping("/goToPayment")
 	public String postMappingChoixTransporteur(Model model, HttpSession session,
-			@RequestParam("idTarif") Integer idTarif) {
-		System.out.println("idTarif : " + idTarif);
-		//a continuer en ajoutant le reste
+			@RequestParam("idTarif") Integer idTarif,
+			@ModelAttribute("tarifs") ArrayList<Tarif> tarifs) {
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		Tarif tarif = colisServiceDelegate.getTarif(idTarif);
+		sessionCart.setSendingPrice(tarif.getPrice());
+		sessionCart.setTransporteur(tarif.getTransporteur().getName());
 		return "redirect:payment";
 	}
 
@@ -100,13 +82,14 @@ public class PaymentController {
 			@ModelAttribute("command") Command command) {
 		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
 		User sessionUser = (User) session.getAttribute("sessionUser");
-
-		//Floriane : nouvelle méthode pour créer une command, plus simple :
-		command = cmdService.createCommand(sessionCart, sessionUser); 
-		System.out.println("command : post Service : " + command.toString());
+		try {
+			command.getDeliveryAddress().setUser(sessionUser);
+			command.getFacturationAddress().setUser(sessionUser);
+		} catch (Exception e) {
+			System.out.println("paymentController, adresse non remplie");
+		}
+		command = cmdService.createCommand(command, sessionCart, sessionUser); 
 		cmdService.saveUser(sessionUser); 
-		//Floriane : modif méthode service : à priori ne sert plus, tester avec le front
-		//	cmdService.saveCommand(command); //stocker en BDD command et addresses
 
 		try {
 			Thread.sleep(3000);
@@ -116,6 +99,5 @@ public class PaymentController {
 		}
 		return "redirect:home";
 	}
-
 
 }

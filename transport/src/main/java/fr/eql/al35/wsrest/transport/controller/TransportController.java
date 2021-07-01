@@ -19,14 +19,19 @@ public class TransportController {
 	@Autowired
 	private TransportService transportService;
 
-	@GetMapping("/transporteur/{idTransporteur}") //http://localhost:8086/
+	@GetMapping("/transporteur/{idTransporteur}") //localhost:8088/transport-rest/transporteur/2
 	public Transporteur getTransporteurById(@PathVariable("idTransporteur") Integer idTransporteur) {
 		return transportService.findById(idTransporteur);
 	}
 
-	@GetMapping("/allTarifs/{weight}")
+	@GetMapping("/allTarifs/{weight}") //localhost:8088/transport-rest/allTarifs/9.6
 	public List<Tarif> displayAllTarifs(@PathVariable("weight") Double weight) {
 		return transportService.calculateTarifs(weight);
+	}
+	
+	@GetMapping("/tarif/{idTarif}") // http://localhost:8088/transport-rest/tarif/9
+	public Tarif getTarifById(@PathVariable("idTarif") Integer id) {
+		return transportService.getTarifById(id);
 	}
 
 }

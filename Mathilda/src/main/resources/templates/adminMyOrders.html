@@ -34,7 +34,7 @@
 								aria-controls="TooooOTO" id="boutonHeader">
 								<b>Commande du : </b>
 								<span th:text="${#temporals.format(command.creationDate, 'dd-MMMM-yyyy', new java.util.Locale('fr', 'FR'))}"></span>
-								<b>Status : </b>
+								<b>Statut : </b>
 								<span class="orderStatus"
 										th:if="${command.creationDate != null and command.shippingDate ==null}"> <b class="cmdEnPrep">Commande en cours de pr&eacute;paration</b>
 									</span> <span class="orderStatus"
@@ -102,15 +102,14 @@
 									</tr>
 								</table>
 								<input type="hidden" th:value="${command.id}" name="idCommand" />
-								<div >
-									<a id="card-button-20" class="btn btn-dark btn-sm" type="button" href="/admin/updateOrder" name="Validée" >Valider commande</a>
-								</div>
-								<div >
-									<a id="card-button-21" class="btn btn-dark btn-sm" type="button" href="/admin/updateOrder" name="Envoyée">Confirmer envoi</a>
-								</div>
-								<div >
-									<a id="card-button-22" class="btn btn-dark btn-sm" type="button" href="/admin/updateOrder" name="Retournée">Commande reçue suite à retour</a>
-								</div>
+							 <form  th:action="@{/upDateStatus}" th:object="${status}" method="post" >
+									<th:label class="card-label">Changer de statut : </th:label>
+										<select class="card-input" th:field="${status}" name="status">
+											<option th:each="status2 : ${status}"  th:value="${status2.name}" th:text="${status2.name}"></option>
+										</select>
+									<input type="hidden" th:value="${command.id}" name="idCommand" />
+									<button id="card-button-23" class="btn btn-dark btn-sm " type="submit" value="changer statut">Changer le statut de la commande</button>
+								</form>
 							</div>
 						</div>
 					</div>
