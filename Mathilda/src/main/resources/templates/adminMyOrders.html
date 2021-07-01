@@ -26,7 +26,8 @@
 			</div>	
 		
 			<div class="accordion" id="accordionExample">
-				<div class="card" th:each="command : ${commands}">	
+				<form class="card" th:each="command : ${commands}" th:action="@{/upDateStatus}" method="post">
+				<!--  <div class="card" th:each="command : ${commands}">	-->
 					<div class="card-header" th:id="'heading' + ${command.id}">
 						<h2 class="mb-0">
 							<button class="btn btn-link" type="button" data-toggle="collapse" 
@@ -56,7 +57,13 @@
 					<div th:id="'collapse' + ${command.id}" class="collapse hide" th:attr="aria-labelledby='heading' + ${command.id}" data-parent="#accordionExample">
 						<div class="card-body">
 							<div id="dateCommande" style="_text-align: center">
-								
+								<div class="paraphContent">
+									<b>Client :</b> <span class="price" th:text="${command.user.name} + ' ' + ${command.user.surname}"> </span>
+								</div>
+								<div class="paraphContent">
+									<b>Adresse :</b> <span class="price" th:text="${command.deliveryAddress.street} + ' ' + ${command.deliveryAddress.city.zipCode} +' ' + ${command.deliveryAddress.city.name}"> </span>
+									
+								</div>
 								<div class="paraphContent">
 									<b>Montant de la commande :</b> <span class="price" th:text="${command.taxInPrice} + ' €'"> </span>
 								</div>
@@ -101,19 +108,29 @@
 										</td>
 									</tr>
 								</table>
-								<input type="hidden" th:value="${command.id}" name="idCommand" />
-							 <form  th:action="@{/upDateStatus}" th:object="${status}" method="post" >
-									<th:label class="card-label">Changer de statut : </th:label>
-										<select class="card-input" th:field="${status}" name="status">
-											<option th:each="status2 : ${status}"  th:value="${status2.name}" th:text="${status2.name}"></option>
-										</select>
-									<input type="hidden" th:value="${command.id}" name="idCommand" />
-									<button id="card-button-23" class="btn btn-dark btn-sm " type="submit" value="changer statut">Changer le statut de la commande</button>
-								</form>
 							</div>
+							<div>
+								<!--  <input type="hidden" th:value="${command.id}" name="idCommand" />
+	
+									 <th:label class="card-label">Changer de statut : </th:label>
+										<select class="card-input" th:field="${leStatus}" th:id="${command.id}">
+											<option th:each="status2 : ${lesStatus}"  
+												    th:value="${status2.id}" 
+												    th:text="${status2.name}"></option>
+										</select>
+										<input type="hidden" th:value="${status2.id}" name="idStatus" />
+									<input type="hidden" th:value="${command.id}" name="idCommand" />
+									<button id="card-button-23" class="btn btn-dark btn-sm " type="submit" value="changer statut">Changer le statut de la commande</button>-->
+							</div>
+						
 						</div>
 					</div>
-				</div>
+				<!--</div>  -->
+				
+				
+				
+				
+				</form>
 			</div>
 		</div>
 	</div>

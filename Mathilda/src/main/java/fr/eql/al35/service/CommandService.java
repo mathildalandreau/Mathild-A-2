@@ -156,6 +156,7 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command updateCommand(Command command, Status status) {
+		System.out.println(status.toString());
 		/*addressRepo.save(command.getDeliveryAddress());
 		addressRepo.save(command.getFacturationAddress());
 		cityRepo.save(command.getDeliveryAddress().getCity());
@@ -163,6 +164,23 @@ public class CommandService implements CommandIService {
 		payModeRepo.save(command.getPayMode());
 		vatRepo.save(command.getVat());*/
 		command.setStatus(status);
+		String statusString = status.toString();
+		 switch (statusString) {
+         case "En attente" :  ; 
+                  break;
+         case "Annulée" :  command.setCancelDate(LocalDateTime.now());;
+                  break;
+         case "Validée" :  ;
+                  break;
+         case "Envoyée" :  command.setShippingDate(LocalDateTime.now());
+                  break;
+         case "Reçue" :  command.setDeliveryDate(LocalDateTime.now());
+                  break;
+         case "Retour-envoyée" :  command.setReturnDate(LocalDateTime.now());
+                  break;
+         case "Retournée" :  command.setDeliveryReturnDate(LocalDateTime.now());
+                  break;
+		 }
 		//mettre un switch case sur le status avec mise à jour de la date 
 		
 		//statusRepo.save(command.getStatus());

@@ -33,7 +33,7 @@ public class TransportService implements TransportIService {
 		List<Tarif> allTarifs = (List<Tarif>) tarifDao.findAll();
 		List<Tarif> tarifs = new ArrayList<Tarif>();
 		for (Tarif tarif : allTarifs) {
-			if (weight > tarif.getMinWeight() && weight < tarif.getMaxWeight()) {
+			if (weight >= tarif.getMinWeight() && weight <= tarif.getMaxWeight()) {
 				tarifs.add(tarif);
 			}
 		}

@@ -144,15 +144,16 @@ public class AdminController {
 		return "adminProductInfo";
 	}
 
-	@GetMapping("/admin/command")
+	/*@GetMapping("/admin/command")
 	public String displayAdminCommand( Model model) {
+		model.addAttribute("status", new Status());
 		model.addAttribute("commands", commandService.displayAllCommands());
 		model.addAttribute("statusRef", adminService.displayAllStatus());
 		model.addAttribute("vatRef", adminService.displayAllVats());
 		model.addAttribute("payModeRef", adminService.displayAllPayModes());
 
 		return "adminCommand";
-	}
+	}*/
 
 	/*
 	@PostMapping("/upDateCommands")
@@ -208,22 +209,23 @@ public class AdminController {
 	
 	@GetMapping("/adminMyOrders")
 	public String userCommands(Model model) {
+		model.addAttribute("leStatus", new Status());
 		List<Command> commands = commandService.displayAllCommands();
 		commands.sort((o2,o1) -> o1.getCreationDate().compareTo(o2.getCreationDate()));
-		model.addAttribute("status", statusRepository.findAll());
+		model.addAttribute("lesStatus", statusRepository.findAll());
 		model.addAttribute("commands", commands);
 		return "adminMyOrders";
 	}
 	
 
 	@PostMapping("/upDateStatus")
-	public String updateCommand(Model model, @ModelAttribute("idCommand") Integer id, @ModelAttribute("status") Status status) {
-	
-		
+	public String updateCommand(Model model, @RequestParam("idCommand") Integer id, @RequestParam("idStatus") Integer idstatus) {
+		System.out.println("dans updateCommand id statut " + idstatus);
+		System.out.println(id);
 		Command command = commandService.displaybyId(id);
-		commandService.updateCommand(command, status);
+		//commandService.updateCommand(command, status);
 		model.addAttribute("commands", commandService.displayAllCommands());
-		model.addAttribute("status", statusRepository.findAll());
+		model.addAttribute("lesStatus", statusRepository.findAll());
 		return "adminMyOrders";
 	}
 
