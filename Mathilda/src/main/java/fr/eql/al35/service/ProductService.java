@@ -75,6 +75,7 @@ public class ProductService implements ProductIService {
 		if(product.isPresent()) {
 			product.get().setRefDeletionDate(LocalDateTime.now());
 		}
+		productRepository.save(product.get());
 	}
 
 	@Override
@@ -83,6 +84,7 @@ public class ProductService implements ProductIService {
 		if(product.isPresent()) {
 			product.get().setRefDeletionDate(null);
 		}
+		productRepository.save(product.get());
 	}
 
 	//Méthode ADMIN NON PRIORITAIRE 
