@@ -2,8 +2,6 @@ package fr.eql.al35.wsrest.testsTransport;
 
 import java.util.List;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,17 +12,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import fr.eql.al35.wsrest.transport.TransportApplication;
 import fr.eql.al35.wsrest.transport.entity.Tarif;
-import fr.eql.al35.wsrest.transport.entity.Transporteur;
+
 import fr.eql.al35.wsrest.transport.service.TransportService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -80,17 +72,20 @@ class GetTransporter {
 			assertEquals(3, list.get(2).getTransporteur().getId());
 		}
 	}
-	
-	@DisplayName("Transporter Array")
+
+	@Test
+	@DisplayName("Transporter List")
 	void TU_CalculFees_Array() {
-		List<Tarif> list = transportService.calculateTarifs(0.4); 
-		
-		for (int i = 0; i < list.size(); i++) {	
-			assertThat(list.get(i).getTransporteur().getName().equals("prout"));
+		int i;
+		String reponseTransporteur = "";
+		List<Tarif> list = transportService.calculateTarifs(0.4);		
+		for (i = 0; i < list.size(); i++) {	
+			reponseTransporteur += list.get(i).getTransporteur().getName();						
+			
 		}
-				
-		}
-		
-	
+		System.out.println(reponseTransporteur);
+		assertThat("La PosteMondial RelayUPS").isIn(reponseTransporteur);		
+	}
+
 }
 
