@@ -3,6 +3,7 @@ package fr.eql.al35.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -209,24 +210,21 @@ public class AdminController {
 	public String userCommands(Model model) {
 		List<Command> commands = commandService.displayAllCommands();
 		commands.sort((o2,o1) -> o1.getCreationDate().compareTo(o2.getCreationDate()));
+		model.addAttribute("status", statusRepository.findAll());
 		model.addAttribute("commands", commands);
 		return "adminMyOrders";
 	}
 	
-	/*  par Mathilda, ne marche pas encore
-	@GetMapping("/admin/updateOrder")
-	public String updateCommand(Model model, @ModelAttribute("idCommand") Integer id, @ModelAttribute("action") String action ) {
 
-		Status status = statusRepository.findByName(action);
-		
-		System.out.println("status : " + status.getName());
+	@PostMapping("/upDateStatus")
+	public String updateCommand(Model model, @ModelAttribute("idCommand") Integer id, @ModelAttribute("status") Status status) {
+	
 		
 		Command command = commandService.displaybyId(id);
-		
-		System.out.println("command : " + command);
-		
 		commandService.updateCommand(command, status);
 		model.addAttribute("commands", commandService.displayAllCommands());
+		model.addAttribute("status", statusRepository.findAll());
 		return "adminMyOrders";
-	}*/
+	}
+
 }

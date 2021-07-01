@@ -164,14 +164,16 @@ public class CommandService implements CommandIService {
 
 	@Override
 	public Command updateCommand(Command command, Status status) {
-		addressRepo.save(command.getDeliveryAddress());
+		/*addressRepo.save(command.getDeliveryAddress());
 		addressRepo.save(command.getFacturationAddress());
 		cityRepo.save(command.getDeliveryAddress().getCity());
 		cityRepo.save(command.getFacturationAddress().getCity());
 		payModeRepo.save(command.getPayMode());
-		vatRepo.save(command.getVat());
+		vatRepo.save(command.getVat());*/
 		command.setStatus(status);
-		statusRepo.save(command.getStatus());
+		//mettre un switch case sur le status avec mise à jour de la date 
+		
+		//statusRepo.save(command.getStatus());
 		return cmdRepo.save(command);
 
 	}
