@@ -98,7 +98,7 @@ public class PaymentController {
 			log.error(e.getMessage());
 			Thread.currentThread().interrupt();
 		}
-		return "redirect:products/all";
+		return "redirect:home";
 	}
 
 }

@@ -32,8 +32,7 @@ public class AccountController {
 		//Utilisateur 3 en dur en session (pour ne pas avoir à créer de compte)
 		User user3 = accountService.getUser3();
 		model.addAttribute("sessionUser", user3);
-		//Cart en dur : 
-		model.addAttribute("sessionCart", cartService.generateFakeCart());
+		model.addAttribute("sessionCart", new Cart());
 		
 		//vraie méthode : 
 		//sessionCartGenerator(model, null); commenté pour tester un cart en dur

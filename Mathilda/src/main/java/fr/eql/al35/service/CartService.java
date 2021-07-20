@@ -61,15 +61,21 @@ public class CartService implements CartIService {
 
 	@Override
 	public Cart updateCommandLine(Cart cart, CommandLine commandLine) {
-		for (CommandLine cartCommandLine : cart.getCommandLines()) {
-			if (cartCommandLine.getProduct().getId() == commandLine.getProduct().getId() && cartCommandLine.getColor().getId() == commandLine.getColor().getId()) {
-				cartCommandLine.setProductQuantity(cartCommandLine.getProductQuantity() + commandLine.getProductQuantity());
-				break;
-			} else {
-				Set<CommandLine> newCommandLines = cart.getCommandLines();
-				newCommandLines.add(commandLine);
-				cart.setCommandLines(newCommandLines);
-				break;
+		if (cart.getCommandLines() == null) {
+			Set<CommandLine> newCommandLines = new HashSet<CommandLine>();
+			newCommandLines.add(commandLine);
+			cart.setCommandLines(newCommandLines);
+		} else {
+			for (CommandLine cartCommandLine : cart.getCommandLines()) {
+				if (cartCommandLine.getProduct().getId() == commandLine.getProduct().getId() && cartCommandLine.getColor().getId() == commandLine.getColor().getId()) {
+					cartCommandLine.setProductQuantity(cartCommandLine.getProductQuantity() + commandLine.getProductQuantity());
+					break;
+				} else {
+					Set<CommandLine> newCommandLines = cart.getCommandLines();
+					newCommandLines.add(commandLine);
+					cart.setCommandLines(newCommandLines);
+					break;
+				}
 			}
 		}
 		updateCart(cart);
