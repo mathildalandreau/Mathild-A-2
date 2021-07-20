@@ -60,11 +60,16 @@ public class ProductService implements ProductIService {
 	//Méthode ADMIN NON PRIORITAIRE 
 	@Override
 	public Product upDate(Integer id, Product product) {
+		Product recupProduct = productRepository.findById(id).get();
 		product.setId(id);
-		LocalDateTime now = product.getRefCreationDate();
+		product.setRefCreationDate(recupProduct.getRefCreationDate());
+		product.setRefDeletionDate(recupProduct.getRefDeletionDate());
+		product.setDimension(recupProduct.getDimension());
+		product.setPattern(recupProduct.getPattern());
+		product.setCustomsProducts(recupProduct.getCustomsProducts());
+		product.setPhotos(recupProduct.getPhotos());
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		//LocalDateTime formatDateTime = LocalDateTime.parse(now, formatter);
-		product.setRefCreationDate(now);
 		return productRepository.save(product);
 	}
 

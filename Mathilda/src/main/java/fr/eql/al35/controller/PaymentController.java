@@ -90,6 +90,7 @@ public class PaymentController {
 		}
 		command = cmdService.createCommand(command, sessionCart, sessionUser); 
 		cmdService.saveUser(sessionUser); 
+		model.addAttribute("sessionCart", new Cart());
 
 		try {
 			Thread.sleep(3000);
@@ -97,7 +98,7 @@ public class PaymentController {
 			log.error(e.getMessage());
 			Thread.currentThread().interrupt();
 		}
-		return "redirect:home";
+		return "redirect:products/all";
 	}
 
 }
