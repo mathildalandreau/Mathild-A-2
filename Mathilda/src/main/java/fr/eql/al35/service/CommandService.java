@@ -8,10 +8,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eql.al35.entity.Address;
 import fr.eql.al35.entity.Cart;
+import fr.eql.al35.entity.City;
 import fr.eql.al35.entity.Command;
 import fr.eql.al35.entity.CommandLine;
 import fr.eql.al35.entity.PayMode;
@@ -79,6 +82,17 @@ public class CommandService implements CommandIService {
 		command.setSendingPrice(cart.getSendingPrice());
 		command.setTransporteur(cart.getTransporteur());
 		command.setFinalWeight(cart.getPoidsColis());
+		//ajout point relais : 
+		Address deliveryAdd = new Address();
+		City city = new City();
+		city.setName(cart.getPointRelais().getAdresse().getVille());
+		city.setZipCode(cart.getPointRelais().getAdresse().getCodePostal());
+		deliveryAdd.setStreet(cart.getPointRelais().getAdresse().getRue());
+		cityRepo.save(city);
+		deliveryAdd.setCity(city);
+		command.setDeliveryAddress(deliveryAdd);
+		command.setPointRelais(cart.getPointRelais().getName()); 
+		
 		cmdRepo.save(command); //enregistrer en BDD
 		for (CommandLine cmdLine : cart.getCommandLines()) {
 			cmdLine.setCommand(command);

@@ -2,6 +2,7 @@ package fr.eql.al35.entity;
 
 import java.util.Set;
 
+import fr.eql.al35.dto.PointRelais;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,5 +19,6 @@ public class Cart {
 	private Double sendingPrice;
 	private String transporteur;
 	private Double poidsColis;
+	private PointRelais pointRelais;
 
 }

@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eql.al35.dto.Colis;
+import fr.eql.al35.dto.PointRelais;
 import fr.eql.al35.dto.Tarif;
 import fr.eql.al35.entity.Cart;
 import fr.eql.al35.entity.Command;
@@ -23,6 +25,7 @@ import fr.eql.al35.entity.User;
 import fr.eql.al35.iservice.AccountIService;
 import fr.eql.al35.iservice.ColisService;
 import fr.eql.al35.iservice.CommandIService;
+import fr.eql.al35.iservice.PointRelaisService;
 
 
 @Controller
@@ -38,6 +41,9 @@ public class PaymentController {
 
 	@Autowired
 	ColisService colisServiceDelegate;
+
+	@Autowired
+	PointRelaisService pointRelaisServiceDelegate;
 
 
 	@GetMapping("/choixTransporteur")
@@ -66,15 +72,20 @@ public class PaymentController {
 		Tarif tarif = colisServiceDelegate.getTarif(idTarif);
 		sessionCart.setSendingPrice(tarif.getPrice());
 		sessionCart.setTransporteur(tarif.getTransporteur().getName());
-		return "redirect:payment";
+		String urlPtRelaisAngular ="http://localhost:4200/";
+		return "redirect:" + urlPtRelaisAngular; //ok ? 
 	}
 
+	//a changer
 
-	@GetMapping("/payment")
-	public String displayPayment(Model model, HttpSession session) {
+	@GetMapping("/payment/{id}")
+	public String displayPayment(Model model, HttpSession session, @PathVariable Integer id) {
 		Command command = new Command();
+		PointRelais pointRelais = pointRelaisServiceDelegate.getPointRelais(id);
 		model.addAttribute("command", command);
-		return "payment";
+		Cart sessionCart = (Cart) session.getAttribute("sessionCart");
+		sessionCart.setPointRelais(pointRelais);
+		return "payment"; 
 	}
 
 	@PostMapping("/newCommand") 
@@ -100,5 +111,7 @@ public class PaymentController {
 		}
 		return "redirect:home";
 	}
+
+	//a changer
 
 }

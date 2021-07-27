@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class CommandLine implements Serializable {
 	@ManyToOne ( cascade=CascadeType.MERGE)
 	@JoinColumn(name = "product_id")
 	private Product product;
+	@JsonIgnore
 	@ManyToOne ( cascade=CascadeType.MERGE)
 	@JoinColumn(name = "command_id")
 	private Command command;
@@ -40,17 +43,18 @@ public class CommandLine implements Serializable {
 		return "CommandLine [id=" + id + ", productQuantity=" + productQuantity + ", product=" + product + ", command="
 				+ command + ", color=" + color + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((command == null) ? 0 : command.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((productQuantity == null) ? 0 : productQuantity.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -64,11 +68,6 @@ public class CommandLine implements Serializable {
 			if (other.color != null)
 				return false;
 		} else if (!color.equals(other.color))
-			return false;
-		if (command == null) {
-			if (other.command != null)
-				return false;
-		} else if (!command.equals(other.command))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -87,6 +86,8 @@ public class CommandLine implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 
 }

@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,9 +54,11 @@ public class User implements Serializable {
 	@JoinColumn(name = "user_type_id")
 	private UserType userType;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Address> addresses;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
 	private Set<Command> commands;
 

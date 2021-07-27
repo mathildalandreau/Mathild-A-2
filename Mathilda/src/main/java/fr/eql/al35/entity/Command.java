@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Getter @Setter
 @Entity
 public class Command implements Serializable {
 
@@ -40,6 +40,7 @@ public class Command implements Serializable {
 	private Double sendingPrice;
 	private String transporteur; 
 	private Double finalWeight; 
+	private String pointRelais;
 
 	@ManyToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name = "status_id")
@@ -67,13 +68,16 @@ public class Command implements Serializable {
 	
 	@OneToMany(mappedBy="command", cascade=CascadeType.DETACH)
 	private Set<CommandLine> commandLines;
-	
+
 	@Override
 	public String toString() {
 		return "Command [id=" + id + ", reference=" + reference + ", creationDate=" + creationDate + ", shippingDate="
 				+ shippingDate + ", deliveryDate=" + deliveryDate + ", cancelDate=" + cancelDate + ", returnDate="
 				+ returnDate + ", deliveryReturnDate=" + deliveryReturnDate + ", taxInPrice=" + taxInPrice
-				+ ", taxOutPrice=" + taxOutPrice + "]";
+				+ ", taxOutPrice=" + taxOutPrice + ", sendingPrice=" + sendingPrice + ", transporteur=" + transporteur
+				+ ", finalWeight=" + finalWeight + ", pointRelais=" + pointRelais + ", status=" + status + ", payMode="
+				+ payMode + ", vat=" + vat + ", user=" + user + ", deliveryAddress=" + deliveryAddress
+				+ ", facturationAddress=" + facturationAddress + "]";
 	}
 
 	@Override
@@ -81,17 +85,26 @@ public class Command implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cancelDate == null) ? 0 : cancelDate.hashCode());
+		result = prime * result + ((commandLines == null) ? 0 : commandLines.hashCode());
 		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((deliveryAddress == null) ? 0 : deliveryAddress.hashCode());
 		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime * result + ((deliveryReturnDate == null) ? 0 : deliveryReturnDate.hashCode());
 		result = prime * result + ((facturationAddress == null) ? 0 : facturationAddress.hashCode());
+		result = prime * result + ((finalWeight == null) ? 0 : finalWeight.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((payMode == null) ? 0 : payMode.hashCode());
+		result = prime * result + ((pointRelais == null) ? 0 : pointRelais.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 		result = prime * result + ((returnDate == null) ? 0 : returnDate.hashCode());
+		result = prime * result + ((sendingPrice == null) ? 0 : sendingPrice.hashCode());
 		result = prime * result + ((shippingDate == null) ? 0 : shippingDate.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((taxInPrice == null) ? 0 : taxInPrice.hashCode());
 		result = prime * result + ((taxOutPrice == null) ? 0 : taxOutPrice.hashCode());
+		result = prime * result + ((transporteur == null) ? 0 : transporteur.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((vat == null) ? 0 : vat.hashCode());
 		return result;
 	}
 
@@ -108,6 +121,11 @@ public class Command implements Serializable {
 			if (other.cancelDate != null)
 				return false;
 		} else if (!cancelDate.equals(other.cancelDate))
+			return false;
+		if (commandLines == null) {
+			if (other.commandLines != null)
+				return false;
+		} else if (!commandLines.equals(other.commandLines))
 			return false;
 		if (creationDate == null) {
 			if (other.creationDate != null)
@@ -134,10 +152,25 @@ public class Command implements Serializable {
 				return false;
 		} else if (!facturationAddress.equals(other.facturationAddress))
 			return false;
+		if (finalWeight == null) {
+			if (other.finalWeight != null)
+				return false;
+		} else if (!finalWeight.equals(other.finalWeight))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (payMode == null) {
+			if (other.payMode != null)
+				return false;
+		} else if (!payMode.equals(other.payMode))
+			return false;
+		if (pointRelais == null) {
+			if (other.pointRelais != null)
+				return false;
+		} else if (!pointRelais.equals(other.pointRelais))
 			return false;
 		if (reference == null) {
 			if (other.reference != null)
@@ -149,10 +182,20 @@ public class Command implements Serializable {
 				return false;
 		} else if (!returnDate.equals(other.returnDate))
 			return false;
+		if (sendingPrice == null) {
+			if (other.sendingPrice != null)
+				return false;
+		} else if (!sendingPrice.equals(other.sendingPrice))
+			return false;
 		if (shippingDate == null) {
 			if (other.shippingDate != null)
 				return false;
 		} else if (!shippingDate.equals(other.shippingDate))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		if (taxInPrice == null) {
 			if (other.taxInPrice != null)
@@ -164,171 +207,22 @@ public class Command implements Serializable {
 				return false;
 		} else if (!taxOutPrice.equals(other.taxOutPrice))
 			return false;
+		if (transporteur == null) {
+			if (other.transporteur != null)
+				return false;
+		} else if (!transporteur.equals(other.transporteur))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (vat == null) {
+			if (other.vat != null)
+				return false;
+		} else if (!vat.equals(other.vat))
+			return false;
 		return true;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getReference() {
-		return reference;
-	}
-
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
-	public LocalDateTime getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDateTime creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public LocalDateTime getShippingDate() {
-		return shippingDate;
-	}
-
-	public void setShippingDate(LocalDateTime shippingDate) {
-		this.shippingDate = shippingDate;
-	}
-
-	public LocalDateTime getDeliveryDate() {
-		return deliveryDate;
-	}
-
-	public void setDeliveryDate(LocalDateTime deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
-
-	public LocalDateTime getCancelDate() {
-		return cancelDate;
-	}
-
-	public void setCancelDate(LocalDateTime cancelDate) {
-		this.cancelDate = cancelDate;
-	}
-
-	public LocalDateTime getReturnDate() {
-		return returnDate;
-	}
-
-	public void setReturnDate(LocalDateTime returnDate) {
-		this.returnDate = returnDate;
-	}
-
-	public LocalDateTime getDeliveryReturnDate() {
-		return deliveryReturnDate;
-	}
-
-	public void setDeliveryReturnDate(LocalDateTime deliveryReturnDate) {
-		this.deliveryReturnDate = deliveryReturnDate;
-	}
-
-	public Double getTaxInPrice() {
-		return taxInPrice;
-	}
-
-	public void setTaxInPrice(Double taxInPrice) {
-		this.taxInPrice = taxInPrice;
-	}
-
-	public Double getTaxOutPrice() {
-		return taxOutPrice;
-	}
-
-	public void setTaxOutPrice(Double taxOutPrice) {
-		this.taxOutPrice = taxOutPrice;
-	}
-
-	public Double getSendingPrice() {
-		return sendingPrice;
-	}
-
-	public void setSendingPrice(Double sendingPrice) {
-		this.sendingPrice = sendingPrice;
-	}
-
-	public String getTransporteur() {
-		return transporteur;
-	}
-
-	public void setTransporteur(String transporteur) {
-		this.transporteur = transporteur;
-	}
-
-	public Double getFinalWeight() {
-		return (Math.round(finalWeight*100d) / 100d);
-	}
-
-	public void setFinalWeight(Double finalWeight) {
-		this.finalWeight = finalWeight;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public PayMode getPayMode() {
-		return payMode;
-	}
-
-	public void setPayMode(PayMode payMode) {
-		this.payMode = payMode;
-	}
-
-	public Vat getVat() {
-		return vat;
-	}
-
-	public void setVat(Vat vat) {
-		this.vat = vat;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
-	}
-
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
-
-	public Address getFacturationAddress() {
-		return facturationAddress;
-	}
-
-	public void setFacturationAddress(Address facturationAddress) {
-		this.facturationAddress = facturationAddress;
-	}
-
-	public Set<CommandLine> getCommandLines() {
-		return commandLines;
-	}
-
-	public void setCommandLines(Set<CommandLine> commandLines) {
-		this.commandLines = commandLines;
-	}
-	
-	
-
-
 
 }
